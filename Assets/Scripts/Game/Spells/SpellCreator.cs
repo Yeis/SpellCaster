@@ -9,9 +9,9 @@ public class SpellCreator : MonoBehaviour
 
     public void CreateSpell(GameObject spell, Transform transform, Vector2 direction)
     {
-        print("Rotation: " + transform.rotation);
+        // print("Rotation: " + transform.rotation);
         float angle = Vector2.Angle(Direction.Right ,direction);
-        print("Angle:" + angle);
+        // print("Angle:" + angle);
         Instantiate(spell, new Vector2(transform.position.x + (spawnDistance * direction.x),
             transform.position.y + (spawnDistance * direction.y)),
             Quaternion.Euler(0, 0, angle));

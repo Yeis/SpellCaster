@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         }
    
 
-        print("CurrDirection: " + currDirectiion);
+        // print("CurrDirection: " + currDirectiion);
 
     }
 }
