@@ -1,0 +1,1061 @@
+fileFormatVersion: 2
+guid: 7fd95d3e4c615bc43b203bb2cdfc9205
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1882992121777587144
+    second: Mondo_Grass_TileSet (2)_0
+  - first:
+      213: 6961396512081015381
+    second: Mondo_Grass_TileSet (2)_1
+  - first:
+      213: 7806447996117584969
+    second: Mondo_Grass_TileSet (2)_2
+  - first:
+      213: -4093999889637269775
+    second: Mondo_Grass_TileSet (2)_3
+  - first:
+      213: -2903856865724829809
+    second: Mondo_Grass_TileSet (2)_4
+  - first:
+      213: -8902137131631640193
+    second: Mondo_Grass_TileSet (2)_5
+  - first:
+      213: -4805413090826580825
+    second: Mondo_Grass_TileSet (2)_6
+  - first:
+      213: -4919723166686533509
+    second: Mondo_Grass_TileSet (2)_7
+  - first:
+      213: -2696238203375430260
+    second: Mondo_Grass_TileSet (2)_8
+  - first:
+      213: 8354640703725313496
+    second: Mondo_Grass_TileSet (2)_9
+  - first:
+      213: -2252087464446026788
+    second: Mondo_Grass_TileSet (2)_10
+  - first:
+      213: 8772768043642383821
+    second: Mondo_Grass_TileSet (2)_11
+  - first:
+      213: 2795641172214306628
+    second: Mondo_Grass_TileSet (2)_12
+  - first:
+      213: -256874324884276419
+    second: Mondo_Grass_TileSet (2)_13
+  - first:
+      213: 4406125864986644642
+    second: Mondo_Grass_TileSet (2)_14
+  - first:
+      213: -8727925373697661834
+    second: Mondo_Grass_TileSet (2)_15
+  - first:
+      213: -3450332468106249050
+    second: Mondo_Grass_TileSet (2)_16
+  - first:
+      213: 329682300414217567
+    second: Mondo_Grass_TileSet (2)_17
+  - first:
+      213: -6879238326060620770
+    second: Mondo_Grass_TileSet (2)_18
+  - first:
+      213: -91599621409695257
+    second: Mondo_Grass_TileSet (2)_19
+  - first:
+      213: 8870305106952020265
+    second: Mondo_Grass_TileSet (2)_20
+  - first:
+      213: -450205832244653976
+    second: Mondo_Grass_TileSet (2)_21
+  - first:
+      213: -7935415669965910173
+    second: Mondo_Grass_TileSet (2)_22
+  - first:
+      213: -5834011717964957542
+    second: Mondo_Grass_TileSet (2)_23
+  - first:
+      213: 4264031020388060120
+    second: Mondo_Grass_TileSet (2)_24
+  - first:
+      213: -6990259703284199955
+    second: Mondo_Grass_TileSet (2)_25
+  - first:
+      213: -5106563486573134714
+    second: Mondo_Grass_TileSet (2)_26
+  - first:
+      213: 6672954278813904959
+    second: Mondo_Grass_TileSet (2)_27
+  - first:
+      213: -9070904728392916691
+    second: Mondo_Grass_TileSet (2)_28
+  - first:
+      213: -3822949187407918619
+    second: Mondo_Grass_TileSet (2)_29
+  - first:
+      213: -4008260068443107405
+    second: Mondo_Grass_TileSet (2)_30
+  - first:
+      213: -6320026628779131024
+    second: Mondo_Grass_TileSet (2)_31
+  - first:
+      213: 2305284640066072183
+    second: Mondo_Grass_TileSet (2)_32
+  - first:
+      213: -4747637570525065545
+    second: Mondo_Grass_TileSet (2)_33
+  - first:
+      213: 3116896528767539304
+    second: Mondo_Grass_TileSet (2)_34
+  - first:
+      213: 6657310209379265830
+    second: Mondo_Grass_TileSet (2)_0
+  - first:
+      213: 107497577755470991
+    second: Mondo_Grass_TileSet (2)_1
+  - first:
+      213: -6130677317559302434
+    second: Mondo_Grass_TileSet (2)_2
+  - first:
+      213: 1894980358230764674
+    second: Mondo_Grass_TileSet (2)_3
+  - first:
+      213: 2241539430671589292
+    second: Mondo_Grass_TileSet (2)_4
+  - first:
+      213: 1108187662368606268
+    second: Mondo_Grass_TileSet (2)_5
+  - first:
+      213: 1758063508574043653
+    second: Mondo_Grass_TileSet (2)_6
+  - first:
+      213: -5474238481611993571
+    second: Mondo_Grass_TileSet (2)_7
+  - first:
+      213: -5195840115127920750
+    second: Mondo_Grass_TileSet (2)_8
+  - first:
+      213: 1942350198139054046
+    second: Mondo_Grass_TileSet (2)_9
+  - first:
+      213: -2809045921709168950
+    second: Mondo_Grass_TileSet (2)_10
+  - first:
+      213: 5371002922113728927
+    second: Mondo_Grass_TileSet (2)_11
+  - first:
+      213: -2095942883648898439
+    second: Mondo_Grass_TileSet (2)_12
+  - first:
+      213: -733588883014750934
+    second: Mondo_Grass_TileSet (2)_13
+  - first:
+      213: 5462013033328293237
+    second: Mondo_Grass_TileSet (2)_14
+  - first:
+      213: 6258942103397915472
+    second: Mondo_Grass_TileSet (2)_15
+  - first:
+      213: -7449978959730050306
+    second: Mondo_Grass_TileSet (2)_16
+  - first:
+      213: 6981784979274569366
+    second: Mondo_Grass_TileSet (2)_17
+  - first:
+      213: -6796115588437854922
+    second: Mondo_Grass_TileSet (2)_18
+  - first:
+      213: 7481993164399560967
+    second: Mondo_Grass_TileSet (2)_19
+  - first:
+      213: 5497983260839682891
+    second: Mondo_Grass_TileSet (2)_20
+  - first:
+      213: 2762099476179449056
+    second: Mondo_Grass_TileSet (2)_21
+  - first:
+      213: 12606361829596860
+    second: Mondo_Grass_TileSet (2)_22
+  - first:
+      213: 2521816459801590162
+    second: Mondo_Grass_TileSet (2)_23
+  - first:
+      213: 2520211472889278682
+    second: Mondo_Grass_TileSet (2)_24
+  - first:
+      213: -6497138130699836238
+    second: Mondo_Grass_TileSet (2)_25
+  - first:
+      213: -5321573988749584492
+    second: Mondo_Grass_TileSet (2)_26
+  - first:
+      213: -7138595908244897057
+    second: Mondo_Grass_TileSet (2)_27
+  - first:
+      213: -2920905338411730960
+    second: Mondo_Grass_TileSet (2)_28
+  - first:
+      213: 6649006131251273552
+    second: Mondo_Grass_TileSet (2)_29
+  - first:
+      213: 7477603445349445101
+    second: Mondo_Grass_TileSet (2)_30
+  - first:
+      213: -6336514229894552027
+    second: Mondo_Grass_TileSet (2)_31
+  - first:
+      213: -6822327889434309590
+    second: Mondo_Grass_TileSet (2)_32
+  - first:
+      213: 4847325753517362662
+    second: Mondo_Grass_TileSet (2)_33
+  - first:
+      213: 7984288979923385497
+    second: Mondo_Grass_TileSet (2)_34
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62de1ad0d54836c50800000000000000
+      internalID: 6657310209379265830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8c64583a78ed7100800000000000000
+      internalID: 107497577755470991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed6455e16757beaa0800000000000000
+      internalID: -6130677317559302434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28cefa488925c4a10800000000000000
+      internalID: 1894980358230764674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf163b6c3c8b1f10800000000000000
+      internalID: 2241539430671589292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3883f7bec2116f00800000000000000
+      internalID: 1108187662368606268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50ef1294275e56810800000000000000
+      internalID: 1758063508574043653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e4ebfca199704b0800000000000000
+      internalID: -5474238481611993571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297531ca1faa4e7b0800000000000000
+      internalID: -5195840115127920750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed7ec75d63d94fa10800000000000000
+      internalID: 1942350198139054046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac6e3cefd934409d0800000000000000
+      internalID: -2809045921709168950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f918c2c63b2a98a40800000000000000
+      internalID: 5371002922113728927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a79965d07b9e2e0800000000000000
+      internalID: -2095942883648898439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2deab03cc4c1d5f0800000000000000
+      internalID: -733588883014750934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57536123ae7fccb40800000000000000
+      internalID: 5462013033328293237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05bd4c68eaa3cd650800000000000000
+      internalID: 6258942103397915472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efaf7299b9b5c9890800000000000000
+      internalID: -7449978959730050306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69691d3927844e060800000000000000
+      internalID: 6981784979274569366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 635baa231e85fa1a0800000000000000
+      internalID: -6796115588437854922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 709cfe7442165d760800000000000000
+      internalID: 7481993164399560967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b43a46b65a2cc4c40800000000000000
+      internalID: 5497983260839682891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_21
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e4f7ffd6d2f45620800000000000000
+      internalID: 2762099476179449056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe53c65b69cc2000800000000000000
+      internalID: 12606361829596860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_23
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 299f43385ba4ff220800000000000000
+      internalID: 2521816459801590162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad0fd606bf699f220800000000000000
+      internalID: 2520211472889278682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_25
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b4adfe1b4785d5a0800000000000000
+      internalID: -6497138130699836238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_26
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4975f92f6a8f526b0800000000000000
+      internalID: -5321573988749584492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd28106e7dc9eec90800000000000000
+      internalID: -7138595908244897057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f73d61021cd677d0800000000000000
+      internalID: -2920905338411730960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_29
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05f50a239d3064c50800000000000000
+      internalID: 6649006131251273552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ded6a4b27b8c5c760800000000000000
+      internalID: 7477603445349445101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_31
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5266de451ed2018a0800000000000000
+      internalID: -6336514229894552027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2c07094ee83251a0800000000000000
+      internalID: -6822327889434309590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_33
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ed41013719254340800000000000000
+      internalID: 4847325753517362662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mondo_Grass_TileSet (2)_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c36605684edce60800000000000000
+      internalID: 7984288979923385497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
