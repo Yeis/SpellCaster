@@ -16,45 +16,85 @@ public class Bee : MonoBehaviour
     private float t;
     public float speed;
     public bool isMoving;
+    public float maxDistance;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         currentState = "searching";
         initialPosition = transform.position;
-        //5 -2 0
-        sightArea = new BoundsInt(new Vector3Int(Mathf.CeilToInt(transform.position.x + 1),
-            Mathf.CeilToInt(transform.position.y),
-            Mathf.CeilToInt(transform.position.z)),
-            //Z component must be at least 1;
-            new Vector3Int(2, 2, 1));
+        isMoving = false;
+        animator = GetComponent<Animator>();
+        t = 0;
 
     }
 
-    private void Move()
+    private void Search()
     {
         if (isMoving)
         {
-            t += Time.deltaTime / speed;
-            transform.position = Vector2.Lerp(initialPosition, destination, t);
+            t += speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(initialPosition, destination, t);
+            if ((Vector2)transform.position == destination)
+            {
+                isMoving = false;
+                animator.SetBool("isMoving", false);
+
+            }
         }
         else
         {
-            ScanAreaForFlowers();
+            t = 0;
+            isMoving = true;
+            initialPosition = transform.position;
+            animator.SetBool("isMoving", true);
+
+            Vector2 flowerPosition = ScanAreaForFlowers();
+            if (flowerPosition != Vector2.zero)
+            {
+                destination = flowerPosition;
+                print("flowerPosition: " + flowerPosition);
+                currentState = "going";
+            }
+            else
+            {
+                SetRandomDirection();
+            }
         }
 
+    }
+
+    private void SetRandomDirection()
+    {
+        destination = new Vector2(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance));
+
+        //Mirror Sprite logic
+        if (destination.x >= 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+
+        }
+        destination += (Vector2)transform.position;
     }
 
     private Vector2 ScanAreaForFlowers()
     {
-        TileBase[] tileArray = tileMap.GetTilesBlock(sightArea);
-        print("TileArray size: " + tileArray.Length);
-        for (int index = 0; index < tileArray.Length; index++)
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, maxDistance);
+        return (collider != null && collider.gameObject.tag == "Flower") ? (Vector2)collider.transform.position : Vector2.zero;
+    }
+
+    private void GoToFlower()
+    {
+        t += speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(initialPosition, destination, t);
+        if ((Vector2)transform.position == destination)
         {
-            if(tileArray[index].name.Contains("flower")) {
-                return tileArray[index].GetTileData();
-            }
-            print(tileArray[index]);
+            currentState = "pollination";
         }
 
     }
@@ -66,7 +106,10 @@ public class Bee : MonoBehaviour
         {
             case "searching":
                 //movement related logic
-                ScanArea();
+                Search();
+                break;
+            case "going":
+                GoToFlower();
                 break;
             case "pollination":
                 //pollination related logic 
