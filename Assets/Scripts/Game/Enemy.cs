@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class Enemy : EnemyStateMachine
 {
-    public float health = 30f;
+    public float health = 30f, speed = 3f;
     public List<GameObject> spells;
-    private bool isAttacking;
-    private bool isMoving;
-    private bool isDead;
-    private Vector2 currDirectiion;
+    public Vector2 currDirectiion;
     // Start is called before the first frame update
     private CombatController combatController;
-    private Animator animator;
+    public Animator animator;
+    public GameObject playerReference;
+    public BattleFieldController battleFieldReference;
     void Start()
     {
+        playerReference = GameObject.FindGameObjectWithTag("Player");
+        battleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
+
         combatController = GetComponent<CombatController>();
         animator = GetComponent<Animator>();
         currDirectiion = Direction.Down;
-        SetState(new FollowState(this));
+        // SetState(new WaitState(this));
     }
 
     // Update is called once per frame

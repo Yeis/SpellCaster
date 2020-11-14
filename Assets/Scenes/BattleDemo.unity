@@ -119099,15 +119099,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Froggie
       objectReference: {fileID: 0}
+    - target: {fileID: 995869670247659523, guid: 43d917b981345bc40baa414595c17201,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.39
+      value: -5.61
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: -2.77
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
@@ -121785,7 +121790,7 @@ GameObject:
   - component: {fileID: 1709833102}
   m_Layer: 0
   m_Name: BattleFieldLogic
-  m_TagString: Untagged
+  m_TagString: BattleField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121805,6 +121810,11 @@ MonoBehaviour:
   scanArea: 5
   walkableTileMap: {fileID: 1176717041}
   roadTileMap: {fileID: 1736862739}
+  roadTile: {fileID: 11400000, guid: b7965ba63aee89a45987f16c2762ac92, type: 2}
+  bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
+  start: {x: 0, y: 0}
 --- !u!4 &1709833103
 Transform:
   m_ObjectHideFlags: 0
@@ -123851,7 +123861,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -123928,6 +123938,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7556014960990485208, guid: 26dd4506526d34275b7922329492b031,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 7556014960990485209, guid: 26dd4506526d34275b7922329492b031,
         type: 3}
       propertyPath: m_Name
