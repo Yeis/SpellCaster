@@ -3,70 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Bee : MonoBehaviour
+public class Bee : StateMachine
 {
-    public string currentState;
-    private BeeState beeState;
-    public Tilemap tileMap;
-
+//     public string currentState;
+//     private BeeState beeState;
+//     public Tilemap tileMap;
 
     //Searching State Properties
-    public BoundsInt sightArea;
-    private Vector2 destination, initialPosition;
-    private float t;
+    public Vector2 destination, initialPosition;
     public float speed;
-    public bool isMoving;
+    public float maxDistance;
+    public bool hasFoundFlower;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        // currentState = "searching";
-        // initialPosition = transform.position;
-        // //5 -2 0
-        // sightArea = new BoundsInt(new Vector3Int(Mathf.CeilToInt(transform.position.x + 1),
-        //     Mathf.CeilToInt(transform.position.y),
-        //     Mathf.CeilToInt(transform.position.z)),
-        //     //Z component must be at least 1;
-        //     new Vector3Int(2, 2, 1));
-
-    }
-
-    private void Move()
-    {
-        // if (isMoving)
-        // {
-        //     t += Time.deltaTime / speed;
-        //     transform.position = Vector2.Lerp(initialPosition, destination, t);
-        // }
-        // else
-        // {
-        //     ScanAreaForFlowers();
-        // }
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        // switch (currentState)
-        // {
-        //     case "searching":
-        //         //movement related logic
-        //         ScanArea();
-        //         break;
-        //     case "pollination":
-        //         //pollination related logic 
-        //         break;
-        //     default:
-        //         break;
-        // }
+        hasFoundFlower = false;
+        animator = GetComponent<Animator>();
+        SetState(new SearchState(this));
     }
 
     //Debugging
     void OnDrawGizmos()
     {
-        // Gizmos.color = Color.yellow;
-        // Gizmos.DrawWireCube(sightArea.position, sightArea.size);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(initialPosition, destination);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        print("Coolision Enter");
+        SetState(new BounceState(this));
     }
 }
