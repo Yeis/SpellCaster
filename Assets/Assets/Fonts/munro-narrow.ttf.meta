@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1b88168a23d2e3548a1f15939f189464
+guid: f9fce9d514bb04ea0b81bcd36dc1ecda
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: 6809 Chargen
+  fontName: Munro Narrow
   fontNames:
-  - 6809 Chargen
+  - Munro Narrow
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

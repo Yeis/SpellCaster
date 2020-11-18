@@ -36,5 +36,4 @@ public class Bee : StateMachine
         print("Coolision Enter");
         SetState(new BounceState(this));
     }
-
 }
