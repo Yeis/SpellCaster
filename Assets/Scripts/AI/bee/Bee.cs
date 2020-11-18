@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Bee : StateMachine
+public class Bee : BeeStateMachine
 {
 //     public string currentState;
 //     private BeeState beeState;

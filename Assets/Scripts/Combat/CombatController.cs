@@ -21,7 +21,7 @@ public class CombatController : MonoBehaviour
     //Sets Enemy trigger and creates spell
     public void Attack(GameObject spell, Vector2 direction)
     {
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("Attacking");
         spell.GetComponent<Spell>().Direction = direction;
         spellCreator.CreateSpell(spell, transform, direction);
 

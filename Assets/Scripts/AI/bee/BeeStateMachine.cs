@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+public abstract class BeeStateMachine : MonoBehaviour
 {
     protected BeeState BeeState;
     protected Coroutine currentCoroutine;
