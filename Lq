@@ -1,0 +1,66 @@
+[33mcommit 4ab720b7a99461f8887d13628f7631f8358f21a1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mAI[m[33m)[m
+Author: Rodolfo Hernandez <rodolfo@Pascal.local>
+Date:   Mon Oct 26 16:01:33 2020 -0700
+
+    Maguito general and battle movement with new InputSystem
+
+[33mcommit 1dc6a4a21d56819cf382c97431f94fb6d88dada8[m
+Merge: 53ba3e9 6cde5e6
+Author: Rodolfo Hernandez <rodolfo@Pascal.local>
+Date:   Mon Oct 26 15:57:06 2020 -0700
+
+    Merge branch 'maguito-movement' of github.com:Yeis/SpellCaster into maguito-movement
+
+[33mcommit 53ba3e9f5ad3e1d71fe80a4c56336c3076d9f77d[m
+Author: Rodolfo Hernandez <rodolfo@Pascal.local>
+Date:   Tue Oct 20 19:25:30 2020 -0700
+
+    Adding maguito prefab and handling movement
+
+[33mcommit 3a182257bb0d7861e2ebb0997680e97047223362[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Fri Oct 23 00:58:01 2020 -0700
+
+    Finishing up Bee AI
+
+[33mcommit 6cde5e629d7ea77ef453dbb68ccb5bb028a8bdce[m
+Author: Rodolfo Hernandez <rodolfo@Pascal.local>
+Date:   Tue Oct 20 19:25:30 2020 -0700
+
+    Adding maguito prefab and handling movement
+
+[33mcommit 8d5df210f81848df245271b011d3069821827c7b[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Tue Oct 13 18:09:32 2020 -0700
+
+    Almost done with Bee AI
+
+[33mcommit 6f24eb0385c71154e8400732449dc9f8cbff4e38[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Mon Oct 5 22:18:07 2020 -0700
+
+    Adding Meta Files
+
+[33mcommit 92a5c542b53f77e3226a377a5129b711f7178187[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Mon Oct 5 19:02:58 2020 -0700
+
+    Bee StateMachine in progress
+
+[33mcommit d213f7503314521854e118b2a6f236ed4674d2b0[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Sun Sep 27 22:31:23 2020 -0700
+
+    Adding CombatController and assets
+
+[33mcommit 177c5cec653afc4ecb0b3a78d8c8df6958500fee[m
+Author: DESKTOP-F13JUGS\josec <jcrockyeis@gmail.com>
+Date:   Tue Aug 25 08:58:27 2020 -0700
+
+    First combat demo
+
+[33mcommit 5f0e60e90dd8026b676d861fd18998fe643cf27f[m
+Author: Yeis <jcrockyeis@gmail.com>
+Date:   Tue Aug 25 08:52:36 2020 -0700
+
+    Initial commit
