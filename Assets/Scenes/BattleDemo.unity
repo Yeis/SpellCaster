@@ -119087,6 +119087,25 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &801962877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 995869670247659522, guid: 43d917b981345bc40baa414595c17201,
+    type: 3}
+  m_PrefabInstance: {fileID: 981719953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &801962878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801962877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2459ce61a3ddc4b408d5a167ab55ece5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDistance: 0.5
 --- !u!1001 &981719953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119094,6 +119113,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 516332785, guid: 43d917b981345bc40baa414595c17201, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516332785, guid: 43d917b981345bc40baa414595c17201, type: 3}
+      propertyPath: spells.Array.data[0]
+      value: 
+      objectReference: {fileID: 6549004860323854262, guid: fcafa2b59bfc1234bb6a2d23c5a5bb6e,
+        type: 3}
     - target: {fileID: 995869670247659522, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_Name
@@ -119104,15 +119132,20 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 116
       objectReference: {fileID: 0}
+    - target: {fileID: 995869670247659523, guid: 43d917b981345bc40baa414595c17201,
+        type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.61
+      value: 13.45
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.77
+      value: 5.84
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
@@ -119127,7 +119160,7 @@ PrefabInstance:
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
@@ -119137,7 +119170,7 @@ PrefabInstance:
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
@@ -119152,7 +119185,7 @@ PrefabInstance:
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 995869670247659524, guid: 43d917b981345bc40baa414595c17201,
         type: 3}
@@ -119178,7 +119211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1176717039
 Transform:
   m_ObjectHideFlags: 0
@@ -123784,7 +123817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1839735485 &1736862739
 Tilemap:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Enemy : EnemyStateMachine
     public List<GameObject> spells;
     public Vector2 currDirectiion;
     // Start is called before the first frame update
-    private CombatController combatController;
+    public CombatController combatController;
     public Animator animator;
     public GameObject playerReference;
     public BattleFieldController battleFieldReference;
@@ -20,7 +20,7 @@ public class Enemy : EnemyStateMachine
         combatController = GetComponent<CombatController>();
         animator = GetComponent<Animator>();
         currDirectiion = Direction.Down;
-        // SetState(new WaitState(this));
+        SetState(new WaitState(this));
     }
 
     // Update is called once per frame

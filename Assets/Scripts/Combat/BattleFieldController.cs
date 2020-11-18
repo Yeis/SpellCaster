@@ -14,7 +14,7 @@ public class BattleFieldController : MonoBehaviour
     public Vector3Int[,] spots;
     new Camera camera;
     public BoundsInt bounds;
-    private Astar astar;
+    public Astar astar;
     List<Spot> roadPath = new List<Spot>();
     public Vector2Int start;
 
@@ -63,15 +63,15 @@ public class BattleFieldController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
-            Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
-            Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
-            roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
-            new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
+        Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
+        Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
-            DrawRoad();
-        
+        roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
+        new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
+
+        DrawRoad();
+
 
 
     }

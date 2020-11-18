@@ -11,7 +11,6 @@ public class PollinationState : BeeState
     public override IEnumerator Start()
     {
         Bee.print("PollinationState");
-
         Bee.animator.SetBool("isPollinating", true);
         yield return new WaitForSeconds(2f);
         Bee.animator.SetBool("isPollinating", false);
