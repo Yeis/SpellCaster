@@ -54,10 +54,7 @@ public class NewUIController : MonoBehaviour
         }
 
         //Set selector position to be left of the command 
-        selector.rectTransform.position = new Vector3() 
-        commandLabels[currentMenuIndex].rectTransform.position.y;
-        M1ndG
-
-
+        selector.rectTransform.position = new Vector3();
+        // commandLabels[currentMenuIndex].rectTransform.position.y;
     }
 }
