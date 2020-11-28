@@ -11,7 +11,7 @@ public class GoState : BeeState
     public override IEnumerator Start()
     {
 
-        Bee.print("GoState");
+        // Bee.print("GoState");
         float i = 0.0f;
         float rate = 1.0f / Bee.speed;
         Bee.animator.SetBool("isMoving", true);

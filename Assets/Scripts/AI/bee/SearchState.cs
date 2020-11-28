@@ -11,7 +11,7 @@ public class SearchState : BeeState
 
     public override IEnumerator Start()
     {
-        Bee.print("SearchState");
+        // Bee.print("SearchState");
         Bee.initialPosition = Bee.transform.position;
 
         Vector2 flowerPosition = ScanAreaForFlowers();
@@ -19,10 +19,10 @@ public class SearchState : BeeState
         {
             Bee.destination = flowerPosition;
             Bee.hasFoundFlower = true;
-            Bee.print("Found Flower at: " + flowerPosition);
+            // Bee.print("Found Flower at: " + flowerPosition);
         }
         else if(flowerPosition == Bee.initialPosition){
-            Bee.print("Sitting on flower gotta move on");
+            // Bee.print("Sitting on flower gotta move on");
             SetRandomDirection(Bee.maxDistance * 2);
         }
         else
