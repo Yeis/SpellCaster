@@ -5,5 +5,6 @@ using UnityEngine;
 public enum SpellType 
 {
     Fire,
-    Water
+    Water,
+    Protection
 }

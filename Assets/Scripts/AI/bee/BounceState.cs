@@ -9,14 +9,14 @@ public class BounceState : BeeState
 
     public override IEnumerator Start()
     {
-        Bee.print("BounceState");
+        // Bee.print("BounceState");
         Vector3 initialPos = Bee.initialPosition;
         Bee.initialPosition = Bee.transform.position;
         Bee.destination = initialPos;
 
-        Bee.print("BounceState InitialPosition: " + Bee.initialPosition);
+        // Bee.print("BounceState InitialPosition: " + Bee.initialPosition);
 
-        Bee.print("BounceState Destination: " + Bee.destination);
+        // Bee.print("BounceState Destination: " + Bee.destination);
         Bee.transform.localScale = new Vector3(-1, 1, 1);
 
         // if (Bee.destination.x >= 0)

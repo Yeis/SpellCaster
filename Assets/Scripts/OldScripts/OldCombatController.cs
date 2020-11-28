@@ -48,7 +48,7 @@
 //                         uIController.UpdateSpellText(currentSpell.name, ++currentSpellIndex);
 //                         if (currentSpellIndex == currentSpell.name.Length)
 //                         {
-//                             EndAttack();
+//                             currentSpellIndex();
 //                             break;
 //                         }
 
@@ -98,7 +98,7 @@
 //         uIController.EnableAttackUI();
 //     }
 
-//     public void EndAttack()
+//     public void currentSpellIndex()
 //     {
 //         isAttacking = false;
 //         uIController.UpdateSpellText("Spell Successful", 0);

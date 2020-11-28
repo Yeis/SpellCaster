@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WaitState : EnemyState
 {
+
     public WaitState(Enemy enemy) : base(enemy)
     {
     }
@@ -14,8 +15,23 @@ public class WaitState : EnemyState
         Enemy.print("WaitState");
         Enemy.animator.SetFloat("Horizontal", Enemy.currDirectiion.x);
         Enemy.animator.SetFloat("Vertical", Enemy.currDirectiion.y);
+
+
+        float i = 0.0f;
+        float rate = 1.0f / Enemy.movementCooldown;
+        Vector3 destination = new Vector3(Enemy.actionSlider.transform.position.x + .98f, Enemy.actionSlider.transform.position.y, Enemy.actionSlider.transform.position.z);
+        while (i < Enemy.movementCooldown)
+        {
+            i += Time.deltaTime;
+            Vector3 currentPos = Enemy.actionSlider.transform.position;
+            float time = Vector3.Distance(currentPos, destination) / (Enemy.movementCooldown - i) * Time.deltaTime; ;
+            Enemy.actionSlider.transform.position = Vector2.MoveTowards(currentPos, destination, time);
+            yield return null;
+        }
+
         //Me espero a que la barra se llene
         yield return new WaitForSeconds(.2f);
+        Enemy.actionSlider.transform.position = new Vector3(Enemy.actionSlider.transform.position.x - .98f, Enemy.actionSlider.transform.position.y, Enemy.actionSlider.transform.position.z);
         if (InAttackRange())
         {
             Enemy.SetState(new AttackState(Enemy));
