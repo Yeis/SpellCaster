@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
 
-public class Mage : MonoBehaviour
+public class Player : BattleStateMachine
 {
     /// props
     public string characterName = "MrYeis";

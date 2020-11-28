@@ -33,7 +33,6 @@ public class SearchState : BeeState
         FlipSprite();
         Bee.SetState(new GoState(Bee));
         yield break;
-
     }
 
     private void FlipSprite()

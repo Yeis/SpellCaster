@@ -71,16 +71,4 @@ public class BattleFieldController : MonoBehaviour
         new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
 
         DrawRoad();
-
-
-
-    }
-
-
-
-    // void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawWireCube(bounds.position, bounds.size);
-    // }
-}
+    }}

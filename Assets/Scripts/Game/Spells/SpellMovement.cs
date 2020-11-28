@@ -102,7 +102,7 @@ public class SpellMovement : MonoBehaviour
         }
         else if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Mage>().health -= spell.damage;
+            col.gameObject.GetComponent<Player>().health -= spell.damage;
         }
         col.gameObject.GetComponent<Animator>().SetTrigger("TakeDamage");
 
