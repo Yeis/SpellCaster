@@ -5,17 +5,24 @@ using UnityEngine.Tilemaps;
 
 public class Bee : BeeStateMachine
 {
-    //Searching State Properties
-    public Vector2 destination, initialPosition;
+    //Public Fields
+    public Animator animator;
     public float speed;
     public float maxDistance;
-    public bool hasFoundFlower;
-    public Animator animator;
+
+    //Private fields
+    protected Vector2 initialPosition;
+    protected bool hasFoundFlower;
+    protected Vector2 destination;
+
+    public Vector2 Destination { get => destination; set => destination = value; }
+    public Vector2 InitialPosition { get => initialPosition; set => initialPosition = value; }
+    public bool HasFoundFlower { get => hasFoundFlower; set => hasFoundFlower = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        hasFoundFlower = false;
+        HasFoundFlower = false;
         animator = GetComponent<Animator>();
         SetState(new SearchState(this));
     }
@@ -24,7 +31,7 @@ public class Bee : BeeStateMachine
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(initialPosition, destination);
+        Gizmos.DrawLine(InitialPosition, Destination);
     }
 
     void OnCollisionEnter2D(Collision2D col)

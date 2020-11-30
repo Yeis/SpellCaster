@@ -11,9 +11,9 @@ public class AttackState : EnemyState
 
     public override IEnumerator Start()
     {
-        Enemy.animator.SetFloat("Horizontal", Enemy.currDirectiion.x);
-        Enemy.animator.SetFloat("Vertical", Enemy.currDirectiion.y);
-        Enemy.combatController.Attack(Enemy.spells[0], Enemy.currDirectiion);
+        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirectiion.x);
+        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
+        Enemy.CombatController.Attack(Enemy.spells[0], Enemy.CurrDirectiion);
         yield return new WaitForSeconds(2f);
 
         Enemy.SetState(new WaitState(Enemy));
