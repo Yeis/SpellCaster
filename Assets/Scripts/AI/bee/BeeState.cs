@@ -18,10 +18,4 @@ public abstract class BeeState
     public virtual IEnumerator Searching() {
         yield break;
     }
-
-    // public virtual void Going() { }
-
-    // public virtual void Pollination() { }
-
-
 }

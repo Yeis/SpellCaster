@@ -9,7 +9,6 @@ public abstract class BeeStateMachine : MonoBehaviour
 
     public void SetState(BeeState state)
     {
-        // StopCoroutine(currentCoroutine);
         StopAllCoroutines();
         BeeState = state;
         currentCoroutine = StartCoroutine(BeeState.Start());

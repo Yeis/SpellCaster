@@ -5,10 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Bee : BeeStateMachine
 {
-//     public string currentState;
-//     private BeeState beeState;
-//     public Tilemap tileMap;
-
     //Searching State Properties
     public Vector2 destination, initialPosition;
     public float speed;

@@ -59,7 +59,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.48
+  orthographic size: 8.01
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2360178481681432956}
   - component: {fileID: 3247944030969947533}
   - component: {fileID: 926930791278432489}
-  - component: {fileID: 926930791278432490}
+  - component: {fileID: 1712192533}
   m_Layer: 0
   m_Name: Maguito
   m_TagString: Player
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &926930791278432490
+--- !u!114 &1712192533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,10 +283,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7556014960990485209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b310f7b6e8a0e46a73d6500480026c, type: 3}
+  m_Script: {fileID: 11500000, guid: b0e512244d00f4ac485c6e982f66991b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: MrYeis
   health: 50
   speed: 5
-  animator: {fileID: 2360178481681432957}
+  animator: {fileID: 0}
