@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpellType 
-{
+public enum SpellType {
     Fire,
     Water,
     Protection

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Bee : BeeStateMachine
-{
+public class Bee : BeeStateMachine {
     //Searching State Properties
     public Vector2 destination, initialPosition;
     public float speed;
@@ -13,22 +12,19 @@ public class Bee : BeeStateMachine
     public Animator animator;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         hasFoundFlower = false;
         animator = GetComponent<Animator>();
         SetState(new SearchState(this));
     }
 
     //Debugging
-    void OnDrawGizmos()
-    {
+    void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(initialPosition, destination);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
+    void OnCollisionEnter2D(Collision2D col) {
         print("Coolision Enter");
         SetState(new BounceState(this));
     }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class BattleFieldController : MonoBehaviour
-{
+public class BattleFieldController : MonoBehaviour {
 
     GameObject player, enemy;
     public int scanArea = 5;
@@ -20,8 +19,7 @@ public class BattleFieldController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         walkableTileMap.CompressBounds();
         roadTileMap.CompressBounds();
         bounds = walkableTileMap.cellBounds;
@@ -32,37 +30,28 @@ public class BattleFieldController : MonoBehaviour
         astar = new Astar(spots, bounds.size.x, bounds.size.y);
     }
 
-    public void CreateGrid()
-    {
+    public void CreateGrid() {
         spots = new Vector3Int[bounds.size.x, bounds.size.y];
 
-        for (int x = bounds.xMin, i = 0; i < bounds.size.x; x++, i++)
-        {
-            for (int y = bounds.yMin, j = 0; j < bounds.size.y; y++, j++)
-            {
+        for (int x = bounds.xMin, i = 0; i < bounds.size.x; x++, i++) {
+            for (int y = bounds.yMin, j = 0; j < bounds.size.y; y++, j++) {
 
-                if (walkableTileMap.HasTile(new Vector3Int(x, y, 0)))
-                {
+                if (walkableTileMap.HasTile(new Vector3Int(x, y, 0))) {
                     spots[i, j] = new Vector3Int(x, y, 0);
-                }
-                else
-                {
+                } else {
                     spots[i, j] = new Vector3Int(x, y, 1);
                 }
             }
         }
     }
-    private void DrawRoad()
-    {
-        for (int i = 0; i < roadPath.Count; i++)
-        {
+    private void DrawRoad() {
+        for (int i = 0; i < roadPath.Count; i++) {
             roadTileMap.SetTile(new Vector3Int(roadPath[i].X, roadPath[i].Y, 0), roadTile);
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
         Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
         Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
@@ -71,4 +60,5 @@ public class BattleFieldController : MonoBehaviour
         new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
 
         DrawRoad();
-    }}
+    }
+}
