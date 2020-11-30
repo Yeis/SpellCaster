@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateMachine : MonoBehaviour
-{
+public class EnemyStateMachine : MonoBehaviour {
     EnemyState currState;
 
-    public void SetState(EnemyState state)
-    {
+    public void SetState(EnemyState state) {
         // StopCoroutine(currentCoroutine);
         StopAllCoroutines();
         currState = state;

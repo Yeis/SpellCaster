@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Direction 
-{
+public class Direction {
     public static readonly Vector2 Up = Vector2.up;
     public static readonly Vector2 Down = Vector2.down;
     public static readonly Vector2 Left = Vector2.left;

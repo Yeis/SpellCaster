@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoState : BeeState
-{
-    public GoState(Bee bee) : base(bee)
-    {
+public class GoState : BeeState {
+    public GoState(Bee bee) : base(bee) {
     }
 
-    public override IEnumerator Start()
-    {
+    public override IEnumerator Start() {
+
         float i = 0.0f;
         float rate = 1.0f / Bee.speed;
         Bee.animator.SetBool("isMoving", true);
 
-        while (i <= 1.0f)
-        {
+        while (i <= 1.0f) {
             i += Time.deltaTime * rate;
             Bee.transform.position = Vector2.MoveTowards(Bee.InitialPosition, Bee.Destination, i);
             yield return null;
         }
-        
+
         Bee.animator.SetBool("isMoving", false);
 
-        if(Bee.HasFoundFlower) {
+        if (Bee.HasFoundFlower) {
             Bee.SetState(new PollinationState(Bee));
         } else {
             Bee.SetState(new SearchState(Bee));

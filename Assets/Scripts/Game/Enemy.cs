@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : EnemyStateMachine
-{
+public class Enemy : EnemyStateMachine {
     //Public Fields
     public float health = 30f, speed = 3f, movementCooldown = 2f;
     public List<GameObject> spells;
@@ -23,8 +22,7 @@ public class Enemy : EnemyStateMachine
     public BattleFieldController BattleFieldReference { get => battleFieldReference; set => battleFieldReference = value; }
     public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
 
-    void Start()
-    {
+    void Start() {
         PlayerReference = GameObject.FindGameObjectWithTag("Player");
         BattleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;

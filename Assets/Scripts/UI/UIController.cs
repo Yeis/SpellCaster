@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class UIController : MonoBehaviour
-{
+public class UIController : MonoBehaviour {
     public List<string> commands;
     public List<Text> commandLabels, spellLabels;
     private Text attackLabel, spellLabel;
@@ -21,19 +20,16 @@ public class UIController : MonoBehaviour
     private Vector2 navigation;
 
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         Keyboard.current.onTextInput += HandleTypingInput;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         Keyboard.current.onTextInput -= HandleTypingInput;
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         //Get all UI References
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();
@@ -50,8 +46,7 @@ public class UIController : MonoBehaviour
         currentMenuIndex = 0;
         currentCommand = commands[0];
         spellLabel.text = currentSpell;
-        foreach (string command in commands)
-        {
+        foreach (string command in commands) {
             GameObject textLabel = new GameObject(command + "_Label");
             textLabel.transform.SetParent(mainOptionsPanel.transform);
 
@@ -65,8 +60,7 @@ public class UIController : MonoBehaviour
             commandLabels.Add(text);
         }
 
-        foreach (Spell spell in player.spellBook)
-        {
+        foreach (Spell spell in player.spellBook) {
             GameObject textLabel = new GameObject(spell.name + "_Label");
             textLabel.transform.SetParent(spellOptionsPanel.transform);
 
@@ -82,32 +76,26 @@ public class UIController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         HandleMenuInput();
     }
 
-    private void HandleTypingInput(char letter)
-    {
-        if (isInTypingMode)
-        {
+    private void HandleTypingInput(char letter) {
+        if (isInTypingMode) {
             print("CurrentSpellIndex: " + currentSpellIndex);
             //Correct Letter
-            if (currentSpell.Length > currentSpellIndex && currentSpell[currentSpellIndex] == letter)
-            {
+            if (currentSpell.Length > currentSpellIndex && currentSpell[currentSpellIndex] == letter) {
                 print("Correct Letter");
                 UpdateSpellLabel(++currentSpellIndex);
 
-                if (currentSpellIndex == spellLabel.text.Length)
-                {
+                if (currentSpellIndex == spellLabel.text.Length) {
                     ResetHUD();
                 }
             }
         }
     }
 
-    private void ResetHUD()
-    {
+    private void ResetHUD() {
         print("ResetHUD");
         ToggleAttackSubMenu(false);
         isInTypingMode = false;
@@ -117,35 +105,26 @@ public class UIController : MonoBehaviour
         spellLabel.text = currentSpell;
     }
 
-    private void UpdateSpellLabel(int i)
-    {
+    private void UpdateSpellLabel(int i) {
         spellLabel.text = "<color=red>" + currentSpell.Substring(0, i) + "</color>" + currentSpell.Substring(i, currentSpell.Length - i);
     }
 
-    private void HandleMenuInput()
-    {
+    private void HandleMenuInput() {
         if (Keyboard.current[Key.Space].wasPressedThisFrame ||
                 Keyboard.current[Key.RightArrow].wasPressedThisFrame ||
-                Keyboard.current[Key.Enter].wasPressedThisFrame)
-        {
-            if (isInAttackMenu)
-            {
+                Keyboard.current[Key.Enter].wasPressedThisFrame) {
+            if (isInAttackMenu) {
                 isInTypingMode = true;
                 ToggleAttackSubMenu(false);
                 currentSpell = spellLabels[currentMenuIndex].text;
                 spellLabel.text = currentSpell;
                 currentSpellIndex = 0;
-            }
-            else if (!isInTypingMode)
-            {
+            } else if (!isInTypingMode) {
                 ToggleAttackSubMenu(true);
                 currentMenuIndex = 0;
             }
-        }
-        else if (Keyboard.current[Key.LeftArrow].wasPressedThisFrame)
-        {
-            if (isInAttackMenu)
-            {
+        } else if (Keyboard.current[Key.LeftArrow].wasPressedThisFrame) {
+            if (isInAttackMenu) {
                 ToggleAttackSubMenu(false);
                 currentMenuIndex = 0;
             }
@@ -158,52 +137,37 @@ public class UIController : MonoBehaviour
             //     currentSpellIndex = 0;
             // }
 
-        }
-        else if (navigation.y > 0)
-        {
-            if (isInAttackMenu)
-            {
+        } else if (navigation.y > 0) {
+            if (isInAttackMenu) {
                 currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % spellLabels.Count, 0);
-            }
-            else
-            {
+            } else {
                 currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % commands.Count, 0);
             }
 
-        }
-        else if (navigation.y < 0)
-        {
-            if (isInAttackMenu)
-            {
+        } else if (navigation.y < 0) {
+            if (isInAttackMenu) {
                 currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, spellLabels.Count - 1);
-            }
-            else
-            {
+            } else {
                 currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, commands.Count - 1);
             }
         }
 
         //Set selector position to be left of the command 
         float newYPosition;
-        if (isInAttackMenu)
-        {
+        if (isInAttackMenu) {
             newYPosition = spellLabels[currentMenuIndex].rectTransform.position.y;
             attackSelector.rectTransform.position = new Vector3(attackSelector.rectTransform.position.x, newYPosition, attackSelector.rectTransform.position.z);
-        }
-        else
-        {
+        } else {
             newYPosition = commandLabels[currentMenuIndex].rectTransform.position.y;
             selector.rectTransform.position = new Vector3(selector.rectTransform.position.x, newYPosition, selector.rectTransform.position.z);
         }
     }
 
-    public void OnNavigate(InputValue value)
-    {
+    public void OnNavigate(InputValue value) {
         navigation = value.Get<Vector2>();
     }
 
-    private void ToggleAttackSubMenu(bool toogle)
-    {
+    private void ToggleAttackSubMenu(bool toogle) {
         isInAttackMenu = toogle;
         attackSelector.enabled = toogle;
         spellOptionsPanel.SetActive(toogle);

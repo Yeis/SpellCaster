@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BattleState
-{
+public abstract class BattleState {
     protected Player player;
 
     public BattleState(Player player) {
-        player = player;
+        this.player = player;
     }
 
     public virtual IEnumerator Start() {
