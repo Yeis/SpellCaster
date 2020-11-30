@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class NewUIController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     public List<string> commands;
     public List<Text> commandLabels, spellLabels;
@@ -35,7 +35,7 @@ public class NewUIController : MonoBehaviour
     void Start()
     {
         //Get all UI References
-        Mage mage = GameObject.FindGameObjectWithTag("Player").GetComponent<Mage>();
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();
         mainOptionsPanel = GameObject.Find("Main_Options_Panel");
         spellOptionsPanel = GameObject.Find("Spell_Options_Panel");
@@ -65,7 +65,7 @@ public class NewUIController : MonoBehaviour
             commandLabels.Add(text);
         }
 
-        foreach (Spell spell in mage.spellBook)
+        foreach (Spell spell in player.spellBook)
         {
             GameObject textLabel = new GameObject(spell.name + "_Label");
             textLabel.transform.SetParent(spellOptionsPanel.transform);

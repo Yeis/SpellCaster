@@ -10,14 +10,11 @@ public class FollowState : EnemyState
 
     public override IEnumerator Start()
     {
-        //Todo Optimize 
-
-        Enemy.print("FollowState");
- 
+        //Todo Optimize  
         //Get GridPosition
-        Vector2Int gridPlayerPos = (Vector2Int)Enemy.battleFieldReference.walkableTileMap.WorldToCell(Enemy.playerReference.transform.position);
-        Vector2Int gridEnemyPos = (Vector2Int)Enemy.battleFieldReference.walkableTileMap.WorldToCell(Enemy.transform.position);
-        List<Spot> path = Enemy.battleFieldReference.astar.CreatePath(Enemy.battleFieldReference.spots, gridEnemyPos, gridPlayerPos, 1000);
+        Vector2Int gridPlayerPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.PlayerReference.transform.position);
+        Vector2Int gridEnemyPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.transform.position);
+        List<Spot> path = Enemy.BattleFieldReference.astar.CreatePath(Enemy.BattleFieldReference.spots, gridEnemyPos, gridPlayerPos, 1000);
         float i = 0.0f;
         float rate = 1.0f / Enemy.speed;
 
@@ -46,10 +43,10 @@ public class FollowState : EnemyState
         Vector3 tempPosition = Enemy.transform.position;
         Vector3 offsetPostion = tempPosition - Vector3Int.FloorToInt(Enemy.transform.position);
         Vector3 destination = new Vector2(path[path.Count - 2].X + offsetPostion.x, path[path.Count - 2].Y + offsetPostion.y);
-        Enemy.currDirectiion = destination - tempPosition;
-        Enemy.animator.SetFloat("Horizontal", Enemy.currDirectiion.x);
-        Enemy.animator.SetFloat("Vertical", Enemy.currDirectiion.y);
-        Enemy.animator.SetBool("Moving", true);
+        Enemy.CurrDirectiion = destination - tempPosition;
+        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirectiion.x);
+        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
+        Enemy.Animator.SetBool("Moving", true);
 
 
         while (i <= 1.0f)
@@ -58,7 +55,7 @@ public class FollowState : EnemyState
             Enemy.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
             yield return null;
         }
-        Enemy.animator.SetBool("Moving", false);
+        Enemy.Animator.SetBool("Moving", false);
         Enemy.SetState(new WaitState(Enemy));
         #endregion
     }

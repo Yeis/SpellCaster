@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class BeeState
 {
     protected Bee Bee;
-
     public BeeState(Bee bee)
     {
         Bee = bee;

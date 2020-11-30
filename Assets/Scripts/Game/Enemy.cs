@@ -4,92 +4,33 @@ using UnityEngine;
 
 public class Enemy : EnemyStateMachine
 {
+    //Public Fields
     public float health = 30f, speed = 3f, movementCooldown = 2f;
     public List<GameObject> spells;
-    public Vector2 currDirectiion;
-    // Start is called before the first frame update
-    public CombatController combatController;
-    public Animator animator;
-    public GameObject playerReference;
-    public BattleFieldController battleFieldReference;
-    public GameObject actionSlider;
+
+    //Private Fields
+    private CombatController combatController;
+    private Vector2 currDirectiion;
+    private Animator animator;
+    private GameObject playerReference;
+    private BattleFieldController battleFieldReference;
+    private GameObject actionSlider;
+
+    public CombatController CombatController { get => combatController; set => combatController = value; }
+    public Vector2 CurrDirectiion { get => currDirectiion; set => currDirectiion = value; }
+    public Animator Animator { get => animator; set => animator = value; }
+    public GameObject PlayerReference { get => playerReference; set => playerReference = value; }
+    public BattleFieldController BattleFieldReference { get => battleFieldReference; set => battleFieldReference = value; }
+    public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
+
     void Start()
     {
-        playerReference = GameObject.FindGameObjectWithTag("Player");
-        battleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
-        actionSlider = gameObject.transform.Find("Action_Mask").gameObject;
-        combatController = GetComponent<CombatController>();
-        animator = GetComponent<Animator>();
-        currDirectiion = Direction.Down;
+        PlayerReference = GameObject.FindGameObjectWithTag("Player");
+        BattleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
+        ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
+        CombatController = GetComponent<CombatController>();
+        Animator = GetComponent<Animator>();
+        CurrDirectiion = Direction.Down;
         SetState(new WaitState(this));
     }
-
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         combatController.Attack(spells[0], currDirectiion);
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.DownArrow))
-    //     {
-    //         currDirectiion = Direction.BackwardRight;
-    //         animator.SetFloat("Horizontal", -1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.UpArrow))
-    //     {
-    //         currDirectiion = Direction.ForwardRight;
-    //         animator.SetFloat("Horizontal", -1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.DownArrow))
-    //     {
-    //         currDirectiion = Direction.BackwardLeft;
-    //         animator.SetFloat("Horizontal", 1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.UpArrow))
-    //     {
-    //         currDirectiion = Direction.ForwardLeft;
-    //         animator.SetFloat("Horizontal", 1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.UpArrow))
-    //     {
-    //         currDirectiion = Direction.Up;
-    //         animator.SetFloat("Vertical", 1);
-    //         animator.SetFloat("Horizontal", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.DownArrow))
-    //     {
-    //         currDirectiion = Direction.Down;
-    //         animator.SetFloat("Vertical", -1);
-    //         animator.SetFloat("Horizontal", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.LeftArrow))
-    //     {
-    //         currDirectiion = Direction.Left;
-    //         animator.SetFloat("Horizontal", 1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.RightArrow))
-    //     {
-    //         currDirectiion = Direction.Right;
-    //         animator.SetFloat("Horizontal", -1);
-    //         animator.SetFloat("Vertical", 0);
-
-    //     }
-
-
-    //     // print("CurrDirection: " + currDirectiion);
-
-    // }
 }

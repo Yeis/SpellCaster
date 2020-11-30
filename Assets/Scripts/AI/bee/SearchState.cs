@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SearchState : BeeState
 {
+    private const string FLOWER_TAG = "Flower";
     protected List<Collider2D> results;
     public SearchState(Bee bee) : base(bee)
     {
@@ -11,18 +12,16 @@ public class SearchState : BeeState
 
     public override IEnumerator Start()
     {
-        // Bee.print("SearchState");
-        Bee.initialPosition = Bee.transform.position;
+        Bee.InitialPosition = Bee.transform.position;
 
         Vector2 flowerPosition = ScanAreaForFlowers();
         if (flowerPosition != Vector2.zero)
         {
-            Bee.destination = flowerPosition;
-            Bee.hasFoundFlower = true;
-            // Bee.print("Found Flower at: " + flowerPosition);
+            Bee.Destination = flowerPosition;
+            Bee.HasFoundFlower = true;
         }
-        else if(flowerPosition == Bee.initialPosition){
-            // Bee.print("Sitting on flower gotta move on");
+        else if (flowerPosition == Bee.InitialPosition)
+        {
             SetRandomDirection(Bee.maxDistance * 2);
         }
         else
@@ -37,7 +36,7 @@ public class SearchState : BeeState
 
     private void FlipSprite()
     {
-        if ((Bee.destination.x - Bee.initialPosition.x) >= 0)
+        if ((Bee.Destination.x - Bee.InitialPosition.x) >= 0)
         {
             Bee.transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -52,15 +51,13 @@ public class SearchState : BeeState
         return this.Start();
     }
 
-
     private void SetRandomDirection(float distance)
     {
         // If we are calculating a random distance we didn't found flowers
-        Bee.hasFoundFlower = false;
-        Bee.destination = new Vector2(Random.Range(-distance, distance), Random.Range(-distance, distance));
-        Bee.destination += (Vector2)Bee.transform.position;
+        Bee.HasFoundFlower = false;
+        Bee.Destination = new Vector2(Random.Range(-distance, distance), Random.Range(-distance, distance));
+        Bee.Destination += (Vector2)Bee.transform.position;
     }
-
 
     private Vector2 ScanAreaForFlowers()
     {
@@ -70,12 +67,11 @@ public class SearchState : BeeState
         int numColliders = Physics2D.OverlapCircle(Bee.transform.position, Bee.maxDistance, filter.NoFilter(), results);
         for (int i = 0; i < results.Count; i++)
         {
-            if (results[i].gameObject.tag == "Flower")
+            if (results[i].gameObject.tag == FLOWER_TAG)
             {
                 return results[i].transform.position;
             }
         }
         return Vector2.zero;
     }
-
 }
