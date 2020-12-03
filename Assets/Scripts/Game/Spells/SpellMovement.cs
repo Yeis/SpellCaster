@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SpellMovement : MonoBehaviour
-{
+public class SpellMovement : MonoBehaviour {
     public float speed = 3f;
     private float t;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rigidBody;
     private Animator animator;
     public Spell spell;
     public Vector2 initialPosition, destination;
     // Start is called before the first frame update
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody2D>();
+    void Start() {
+        rigidBody = GetComponent<Rigidbody2D>();
         spell = GetComponent<Spell>();
         animator = GetComponent<Animator>();
         //Setup movement
@@ -23,14 +21,12 @@ public class SpellMovement : MonoBehaviour
         SetDestination();
     }
 
-    void Update()
-    {
+    void Update() {
         t += Time.deltaTime / speed;
         transform.position = Vector2.Lerp(initialPosition, destination, t);
 
 
-        if ((Vector2)transform.position == destination)
-        {
+        if ((Vector2)transform.position == destination) {
             animator.SetTrigger("Hit");
         }
     }
@@ -62,13 +58,11 @@ public class SpellMovement : MonoBehaviour
     //     rigidbody.AddForce(direction * speed);
     // }
 
-    public void OnHit()
-    {
+    public void OnHit() {
         Destroy(gameObject);
     }
 
-    private void SetDestination()
-    {
+    private void SetDestination() {
         destination = initialPosition + (spell.direction * spell.maxDistance);
         // switch (spell.Direction)
         // {
@@ -89,19 +83,14 @@ public class SpellMovement : MonoBehaviour
         // }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Proyectile")
-        {
+    void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.tag == "Proyectile") {
             Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
         }
-        if (col.gameObject.tag == "Enemy")
-        {
+        if (col.gameObject.tag == "Enemy") {
             col.gameObject.GetComponent<Enemy>().health -= spell.damage;
 
-        }
-        else if (col.gameObject.tag == "Player")
-        {
+        } else if (col.gameObject.tag == "Player") {
             col.gameObject.GetComponent<Player>().health -= spell.damage;
         }
         col.gameObject.GetComponent<Animator>().SetTrigger("TakeDamage");

@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowState : EnemyState
-{
-    public FollowState(Enemy enemy) : base(enemy)
-    {
+public class FollowState : EnemyState {
+    public FollowState(Enemy enemy) : base(enemy) {
     }
 
-    public override IEnumerator Start()
-    {
-        //Todo Optimize  
+    public override IEnumerator Start() {
+        //Todo Optimize 
         //Get GridPosition
         Vector2Int gridPlayerPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.PlayerReference.transform.position);
         Vector2Int gridEnemyPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.transform.position);
@@ -49,8 +46,7 @@ public class FollowState : EnemyState
         Enemy.Animator.SetBool("Moving", true);
 
 
-        while (i <= 1.0f)
-        {
+        while (i <= 1.0f) {
             i += Time.deltaTime * rate;
             Enemy.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
             yield return null;

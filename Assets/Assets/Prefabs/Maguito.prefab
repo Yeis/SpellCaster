@@ -159,7 +159,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 21
   m_Sprite: {fileID: 6412354218561608956, guid: b120c87e377c1425696934c9d1517c22,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -290,3 +290,4 @@ MonoBehaviour:
   health: 50
   speed: 5
   animator: {fileID: 0}
+  spellBook: []

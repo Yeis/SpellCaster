@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour {
 
-    public string name;
+    public string spellName;
     public float damage;
     public int maxDistance;
     public float castingTime;
@@ -14,9 +14,8 @@ public class Spell : MonoBehaviour {
 
     public Vector2 Direction { get => direction; set => direction = value; }
 
-    public Spell(string name, float damage, int maxDistance, float castingTime, SpellType type, Vector2 direction,  HashSet<Vector2> validDirections)
-    {
-        this.name = name;
+    public Spell(string name, float damage, int maxDistance, float castingTime, SpellType type, Vector2 direction, HashSet<Vector2> validDirections) {
+        this.spellName = name;
         this.damage = damage;
         this.maxDistance = maxDistance;
         this.castingTime = castingTime;
