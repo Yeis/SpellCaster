@@ -17,7 +17,6 @@ public class BattleFieldController : MonoBehaviour {
     List<Spot> roadPath = new List<Spot>();
     public Vector2Int start;
 
-
     // Start is called before the first frame update
     void Start() {
         walkableTileMap.CompressBounds();
@@ -44,16 +43,9 @@ public class BattleFieldController : MonoBehaviour {
             }
         }
     }
-    // private void DrawRoad() {
-    //     for (int i = 0; i < roadPath.Count; i++) {
-    //         roadTileMap.SetTile(new Vector3Int(roadPath[i].X, roadPath[i].Y, 0), preAttackTile);
-    //     }
-    // }
 
+    //Agarra las direcciones del Spell y en base a es pinta los tiles de roadTileMap TileMap
     public void DrawPreAttack(GameObject reference, Spell spell) {
-
-        //Si va a la derecha Vector2D (1,0)
-        //Max Distance 2
         Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
         foreach (Vector2 direction in spell.validDirections) {
             for (int i = 0; i <= spell.maxDistance; i++) {
