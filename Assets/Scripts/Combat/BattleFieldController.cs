@@ -9,7 +9,7 @@ public class BattleFieldController : MonoBehaviour {
     public int scanArea = 5;
     public Tilemap walkableTileMap;
     public Tilemap roadTileMap;
-    public TileBase roadTile;
+    public TileBase preAttackTile;
     public Vector3Int[,] spots;
     new Camera camera;
     public BoundsInt bounds;
@@ -44,21 +44,32 @@ public class BattleFieldController : MonoBehaviour {
             }
         }
     }
-    private void DrawRoad() {
-        for (int i = 0; i < roadPath.Count; i++) {
-            roadTileMap.SetTile(new Vector3Int(roadPath[i].X, roadPath[i].Y, 0), roadTile);
+    // private void DrawRoad() {
+    //     for (int i = 0; i < roadPath.Count; i++) {
+    //         roadTileMap.SetTile(new Vector3Int(roadPath[i].X, roadPath[i].Y, 0), preAttackTile);
+    //     }
+    // }
+
+    public void DrawPreAttack(GameObject reference, Spell spell) {
+
+        //Si va a la derecha Vector2D (1,0)
+        //Max Distance 2
+        Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
+        foreach (Vector2 direction in spell.validDirections) {
+            for (int i = 0; i <= spell.maxDistance; i++) {
+                roadTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x) , gridReferencePos.y + (i * (int)direction.y) , 0), preAttackTile);
+            }
         }
     }
 
+
+
     // Update is called once per frame
     void Update() {
-
         Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
         Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
         roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
         new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
-
-        DrawRoad();
     }
 }
