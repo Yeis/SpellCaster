@@ -42,5 +42,4 @@ public abstract class BattleState {
 
     public virtual void SetChoiceTo(Key key) { }
 
-
 }
