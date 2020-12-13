@@ -14,7 +14,6 @@ public class WaitState : EnemyState {
         Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
 
         float i = 0.0f;
-        float rate = 1.0f / Enemy.movementCooldown;
         Vector3 destination = new Vector3(Enemy.ActionSlider.transform.position.x + .98f, Enemy.ActionSlider.transform.position.y, Enemy.ActionSlider.transform.position.z);
         while (i < Enemy.movementCooldown) {
             i += Time.deltaTime;

@@ -49,12 +49,14 @@ public class BattleFieldController : MonoBehaviour {
         Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
         foreach (Vector2 direction in spell.validDirections) {
             for (int i = 0; i <= spell.maxDistance; i++) {
-                roadTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x) , gridReferencePos.y + (i * (int)direction.y) , 0), preAttackTile);
+                roadTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x), gridReferencePos.y + (i * (int)direction.y), 0), preAttackTile);
             }
         }
     }
 
-
+    public void RemovePreAttack() {
+        // TODO
+    }
 
     // Update is called once per frame
     void Update() {
