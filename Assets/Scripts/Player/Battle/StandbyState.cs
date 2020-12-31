@@ -9,6 +9,9 @@ public class StandbyState : BattleState {
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Standby;
 
+        // Remove Aiming UI in case we're coming back from the Aim state
+        Player.BattleFieldController.RemovePreAttack();
+
         yield return WaitForPlayerInput(new Key[] { Key.Z, Key.X, Key.C });
 
         switch (choice) {

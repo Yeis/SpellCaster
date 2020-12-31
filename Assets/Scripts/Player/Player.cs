@@ -15,14 +15,13 @@ public enum PlayerState {
 
 public class Player : BattleStateMachine {
     public string characterName = "MrYeis";
-    public float health = 50, speed = 5f, movementCooldown = 1f;
+    public float health = 50, speed = 5f;
     public Spell stockpile = null;
 
     public List<Spell> spellBook;
     private Scene currentScene;
     private BattleFieldController battleFieldController;
-    private GameObject actionSlider;
-    public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
+    public BattleFieldController BattleFieldController { get => battleFieldController; set => battleFieldController = value; }
     private Animator animator;
     public Animator Animator { get => animator; set => animator = value; }
     private PlayerState state = PlayerState.Unknown;
@@ -64,10 +63,6 @@ public class Player : BattleStateMachine {
         transform.position += direction;
     }
 
-    /// Called by state machine to modify player position
-    public void Move(Vector3 direction) {
-        transform.position += direction;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         transform.position -= direction;
@@ -84,14 +79,6 @@ public class Player : BattleStateMachine {
 
     public void OnMove(InputValue value) {
         movementInput = value.Get<Vector2>();
-    }
-
-    public void DrawAttackRange(Spell spell) {
-        battleFieldController.DrawPreAttack(this.gameObject.transform.Find("PositionReference").gameObject, spell);
-    }
-
-    public void RemoveAttackRange() {
-        battleFieldController.RemovePreAttack();
     }
 
     #region Debug GUI

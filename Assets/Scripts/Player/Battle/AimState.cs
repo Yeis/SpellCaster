@@ -9,7 +9,7 @@ public class AimState : BattleState {
         Player.StateEnum = PlayerState.Aim;
 
         // Draw selected spell, for now we will always use fire
-        Player.DrawAttackRange(Player.spellBook[0]);
+        Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, Player.spellBook[0]);
 
         yield return WaitForPlayerInput(new Key[] { Key.Period, Key.Comma });
 

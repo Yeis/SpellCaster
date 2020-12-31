@@ -30,7 +30,8 @@ public class MoveState : BattleState {
 
             if (Player.MovementInput.x != 0 || Player.MovementInput.y != 0) {
                 hasMoved = true;
-                Player.Move(movementVector);
+
+                Player.transform.position += movementVector;
             }
 
             yield return null;

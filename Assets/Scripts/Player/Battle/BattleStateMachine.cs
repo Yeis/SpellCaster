@@ -2,7 +2,14 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class BattleStateMachine : MonoBehaviour {
+// TODO: Move this to a more appropriate place?
+public class Character : MonoBehaviour {
+    private GameObject actionSlider;
+    public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
+    public float movementCooldown = 1f;
+}
+
+public class BattleStateMachine : Character {
     BattleState currState;
 
     public void SetState(BattleState state) {
