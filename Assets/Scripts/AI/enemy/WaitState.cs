@@ -13,20 +13,8 @@ public class WaitState : EnemyState {
         Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirectiion.x);
         Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
 
-        float i = 0.0f;
-        float rate = 1.0f / Enemy.movementCooldown;
-        Vector3 destination = new Vector3(Enemy.ActionSlider.transform.position.x + .98f, Enemy.ActionSlider.transform.position.y, Enemy.ActionSlider.transform.position.z);
-        while (i < Enemy.movementCooldown) {
-            i += Time.deltaTime;
-            Vector3 currentPos = Enemy.ActionSlider.transform.position;
-            float time = Vector3.Distance(currentPos, destination) / (Enemy.movementCooldown - i) * Time.deltaTime; ;
-            Enemy.ActionSlider.transform.position = Vector2.MoveTowards(currentPos, destination, time);
-            yield return null;
-        }
+        yield return Cooldown.CountDown(Enemy, .98f);
 
-        //Me espero a que la barra se llene
-        yield return new WaitForSeconds(.2f);
-        Enemy.ActionSlider.transform.position = new Vector3(Enemy.ActionSlider.transform.position.x - .98f, Enemy.ActionSlider.transform.position.y, Enemy.ActionSlider.transform.position.z);
         if (InAttackRange()) {
             Enemy.SetState(new AttackState(Enemy));
         } else {

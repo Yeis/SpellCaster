@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : EnemyStateMachine {
     //Public Fields
-    public float health = 30f, speed = 3f, movementCooldown = 2f;
+    public float health = 30f, speed = 3f;
     public List<GameObject> spells;
 
     //Private Fields
@@ -13,15 +13,15 @@ public class Enemy : EnemyStateMachine {
     private Animator animator;
     private GameObject playerReference;
     private BattleFieldController battleFieldReference;
-    private GameObject actionSlider;
     public CombatController CombatController { get => combatController; set => combatController = value; }
     public Vector2 CurrDirectiion { get => currDirectiion; set => currDirectiion = value; }
     public Animator Animator { get => animator; set => animator = value; }
     public GameObject PlayerReference { get => playerReference; set => playerReference = value; }
     public BattleFieldController BattleFieldReference { get => battleFieldReference; set => battleFieldReference = value; }
-    public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
 
     void Start() {
+        movementCooldown = 2f;
+
         PlayerReference = GameObject.FindGameObjectWithTag("Player");
         BattleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
