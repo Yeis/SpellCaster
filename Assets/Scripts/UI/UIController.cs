@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
     private bool isInAttackMenu = false, isInTypingMode = false;
     private float initialYSelectorPosition, inputDelay;
     private Vector2 navigation;
+    private Animator animator;
 
 
     private void OnEnable() {
@@ -30,6 +31,10 @@ public class UIController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        //Trigger Animation
+        animator = GetComponent<Animator>();
+        animator.SetTrigger("EnableUI");
+
         //Get all UI References
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();

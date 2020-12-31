@@ -11,7 +11,7 @@ public class Player : BattleStateMachine {
     public float health = 50;
     public float speed = 5;
     private float t = 0;
-    public Animator animator;
+    private Animator animator;
     private BattleFieldController battleFieldController;
 
     /// Private
@@ -20,11 +20,10 @@ public class Player : BattleStateMachine {
 
     /// Movement 
     private Vector2 movementInput;
-    private Vector3 direction;
+    public Vector3 direction = new Vector3();
     bool hasMoved;
 
     private void Awake() {
-        battleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         currentScene = SceneManager.GetActiveScene();
 
         spellBook = new List<Spell>();
@@ -38,14 +37,16 @@ public class Player : BattleStateMachine {
     }
 
     private void Start() {
+        animator = GetComponent<Animator>();
         //Example to how to call the DrawPreAttack Function
-        battleFieldController.DrawPreAttack(this.gameObject.transform.Find("PositionReference").gameObject, this.spellBook[0]);
-
+        if (currentScene.name.Contains("Battle")) {
+            battleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
+            battleFieldController.DrawPreAttack(this.gameObject.transform.Find("PositionReference").gameObject, this.spellBook[0]);
+        }
     }
 
     // Update is called once per frame
-    void Update() {
-        Vector3 direction = new Vector3();
+    void FixedUpdate() {
         /// Movement
         if (currentScene.name.Contains("Battle")) {
             if (movementInput.x == 0 && movementInput.y == 0) {
