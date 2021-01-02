@@ -122322,9 +122322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57f60561ea6af648b0a47c737dc62ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanArea: 5
   walkableTileMap: {fileID: 1176717041}
-  roadTileMap: {fileID: 1736862739}
+  preAttackTileMap: {fileID: 1736862739}
   preAttackTile: {fileID: 11400000, guid: 45206f15b4aa89243adadf99dfd8fd7e, type: 2}
   bounds:
     m_Position: {x: 0, y: 0, z: 0}
@@ -124294,7 +124293,7 @@ GameObject:
   - component: {fileID: 1736862739}
   - component: {fileID: 1736862740}
   m_Layer: 0
-  m_Name: Road_Layer
+  m_Name: PreAttack_Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -66,11 +66,11 @@ public class UIController : MonoBehaviour {
         }
 
         foreach (Spell spell in player.spellBook) {
-            GameObject textLabel = new GameObject(spell.name + "_Label");
+            GameObject textLabel = new GameObject(spell.spellName + "_Label");
             textLabel.transform.SetParent(spellOptionsPanel.transform);
 
             Text text = textLabel.AddComponent<Text>();
-            text.text = spell.name;
+            text.text = spell.spellName;
             text.font = font;
             text.rectTransform.sizeDelta = new Vector2(100, 40);
             text.fontSize = 32;
