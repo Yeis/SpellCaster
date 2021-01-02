@@ -1,8 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class BattleStateMachine : MonoBehaviour {
+// TODO: Move this to a more appropriate place?
+public class Character : MonoBehaviour {
+    private GameObject actionSlider;
+    public GameObject ActionSlider { get => actionSlider; set => actionSlider = value; }
+    public float movementCooldown = 1f;
+}
+
+public class BattleStateMachine : Character {
     BattleState currState;
 
     public void SetState(BattleState state) {
@@ -10,5 +17,36 @@ public class BattleStateMachine : MonoBehaviour {
         currState = state;
         StartCoroutine(currState.Start());
     }
+
+}
+
+public abstract class BattleState {
+    protected Player Player;
+    public PlayerState choice = PlayerState.Unknown;
+
+    public BattleState(Player player) {
+        Player = player;
+    }
+
+    public virtual IEnumerator Start() {
+        yield break;
+    }
+
+    public virtual IEnumerator WaitForPlayerInput(Key[] keys) {
+        bool pressed = false;
+        while (!pressed) {
+            foreach (Key k in keys) {
+                if (Keyboard.current[k].wasPressedThisFrame) {
+                    pressed = true;
+                    SetChoiceTo(k);
+                    break;
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    public virtual void SetChoiceTo(Key key) { }
 
 }

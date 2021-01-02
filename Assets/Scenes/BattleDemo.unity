@@ -124453,6 +124453,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1712192533, guid: 26dd4506526d34275b7922329492b031, type: 3}
+      propertyPath: movementCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712192533, guid: 26dd4506526d34275b7922329492b031, type: 3}
+      propertyPath: customGUISkin
+      value: 
+      objectReference: {fileID: 11400000, guid: ca179a739b4124bc3a4eeed9833119a6,
+        type: 2}
     - target: {fileID: 7556014960990485209, guid: 26dd4506526d34275b7922329492b031,
         type: 3}
       propertyPath: m_Name

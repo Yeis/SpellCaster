@@ -8,6 +8,7 @@ public class BattleFieldController : MonoBehaviour {
     GameObject player, enemy;
     public Tilemap walkableTileMap;
     public Tilemap preAttackTileMap;
+
     public TileBase preAttackTile;
     public Vector3Int[,] spots;
     new Camera camera;
@@ -21,7 +22,10 @@ public class BattleFieldController : MonoBehaviour {
         this.walkableTileMap = walkableTileMap;
         this.preAttackTileMap = roadTileMap;
         this.preAttackTile = preAttackTile;
-
+    }
+    
+    // Start is called before the first frame update
+    void Start() {
         walkableTileMap.CompressBounds();
         preAttackTileMap.CompressBounds();
         bounds = walkableTileMap.cellBounds;
@@ -57,16 +61,16 @@ public class BattleFieldController : MonoBehaviour {
         }
     }
 
-
+    public void RemovePreAttack() {
+        // TODO
+    }
 
     // Update is called once per frame
     void Update() {
-        // if(walkableTileMap != null) {
-        //     Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
-        //     Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
-        //     roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
-        //     new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
-        // }
+        Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
+        Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
+        roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
+        new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
     }
 }

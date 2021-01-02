@@ -1,34 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
-public class Player : BattleStateMachine {
-    /// props
-    public string characterName = "MrYeis";
-    public float health = 50;
-    public float speed = 5;
-    private float t = 0;
-    private Animator animator;
-    private BattleFieldController battleFieldController;
+public enum PlayerState {
+    Standby,
+    Cooldown,
+    Aim,
+    Action,
+    Move,
+    Cast,
+    Unknown
+}
 
-    /// Private
+public class Player : BattleStateMachine {
+    public string characterName = "MrYeis";
+    public float health = 50, speed = 5f;
+    private float t = 0;
+    public Spell stockpile = null;
+
     public List<Spell> spellBook;
     private Scene currentScene;
+    private BattleFieldController battleFieldController;
+    public BattleFieldController BattleFieldController { get => battleFieldController; set => battleFieldController = value; }
+    private Animator animator;
+    public Animator Animator { get => animator; set => animator = value; }
+    private PlayerState state = PlayerState.Unknown;
+    public PlayerState StateEnum { get => state; set => state = value; }
 
     /// Movement 
     private Vector2 movementInput;
+    public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
     public Vector3 direction = new Vector3();
-    bool hasMoved;
+    private bool hasMoved;
 
     private void Awake() {
+        if(GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
+            BattleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
+        }
         currentScene = SceneManager.GetActiveScene();
 
         spellBook = new List<Spell>();
-        Spell fira = new Spell("fira", 10f, 2, 1.5f, SpellType.Fire, Vector2.zero, 
-            new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down});
+        Spell fira = new Spell("fira", 10f, 2, 1.5f, SpellType.Fire, Vector2.zero,
+            new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down });
         Spell heal = new Spell("curita", -10f, 0, 3f, SpellType.Protection, Vector2.zero, new HashSet<Vector2>());
 
         spellBook.Add(fira);
@@ -37,57 +51,64 @@ public class Player : BattleStateMachine {
     }
 
     private void Start() {
-        animator = GetComponent<Animator>();
-        //Example to how to call the DrawPreAttack Function
-        if (currentScene.name.Contains("Battle")) {
-            battleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
-            battleFieldController.DrawPreAttack(this.gameObject.transform.Find("PositionReference").gameObject, this.spellBook[0]);
-        }
+        ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
+        Animator = GetComponent<Animator>();
+
+        SetState(new CooldownState(this));
     }
 
-    // Update is called once per frame
     void FixedUpdate() {
-        /// Movement
-        if (currentScene.name.Contains("Battle")) {
-            if (movementInput.x == 0 && movementInput.y == 0) {
-                hasMoved = false;
-            } else if ((movementInput.x != 0 || movementInput.y != 0) && !hasMoved) {
-                hasMoved = true;
-
-                direction = GetGridMovementDirection();
-            }
-        } else {
+        /// Movement - Should be deprecated by state machine
+        if (!currentScene.name.Contains("Battle")) {
             direction = GetMovementDirection();
         }
 
         transform.position += direction;
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        // transform.position -= direction;
+    }
+
+    // Should be deprecated by state machine
     private Vector3 GetMovementDirection() {
-        animator.SetFloat("Horizontal", movementInput.x);
-        animator.SetFloat("Vertical", movementInput.y);
+        Animator.SetFloat("Horizontal", movementInput.x);
+        Animator.SetFloat("Vertical", movementInput.y);
 
         Vector3 movement = new Vector3(movementInput.x, movementInput.y, 0.0f);
         return (movement * speed) * Time.deltaTime;
     }
-    private Vector3 GetGridMovementDirection() {
-        if (movementInput.x < 0) {
-            direction = new Vector3(-1, 0, 0);
-        } else if (movementInput.x > 0) {
-            direction = new Vector3(1, 0, 0);
-        } else if (movementInput.y < 0) {
-            direction = new Vector3(0, -1);
-        } else if (movementInput.y > 0) {
-            direction = new Vector3(0, 1);
-        }
-        return direction;
-    }
+
     public void OnMove(InputValue value) {
         movementInput = value.Get<Vector2>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        transform.position -= direction;
-    }
+    #region Debug GUI
+    public GUISkin customGUISkin;
 
+    private void OnGUI() {
+        GUI.skin = customGUISkin;
+        GUI.Label(new Rect(10, 10, 400, 50), "Current State: " + state);
+
+        switch (state) {
+            case PlayerState.Standby:
+                GUI.Label(new Rect(10, 60, 400, 50), "Go to Aim: Z");
+                GUI.Label(new Rect(10, 110, 400, 50), "Go to Move: X");
+                if (!(stockpile is null)) {
+                    GUI.Label(new Rect(10, 160, 400, 50), "Go to Cast Spell: C");
+                }
+                break;
+            case PlayerState.Move:
+                GUI.Label(new Rect(10, 60, 400, 50), "Move around using WASD");
+                break;
+            case PlayerState.Aim:
+                GUI.Label(new Rect(10, 60, 400, 50), "Confirm selection: .");
+                GUI.Label(new Rect(10, 110, 400, 50), "Go back: ,");
+                break;
+            default: break;
+        }
+
+    }
+    #endregion
 }
