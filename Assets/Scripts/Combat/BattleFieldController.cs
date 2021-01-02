@@ -6,10 +6,9 @@ using UnityEngine.Tilemaps;
 public class BattleFieldController : MonoBehaviour {
 
     GameObject player, enemy;
-    public int scanArea = 5;
     public Tilemap walkableTileMap;
-    public Tilemap roadTileMap;
-    public TileBase roadTile;
+    public Tilemap preAttackTileMap;
+    public TileBase preAttackTile;
     public Vector3Int[,] spots;
     new Camera camera;
     public BoundsInt bounds;
@@ -17,11 +16,14 @@ public class BattleFieldController : MonoBehaviour {
     List<Spot> roadPath = new List<Spot>();
     public Vector2Int start;
 
+    public void SetupGrid(Tilemap walkableTileMap, Tilemap roadTileMap, TileBase preAttackTile)
+    {
+        this.walkableTileMap = walkableTileMap;
+        this.preAttackTileMap = roadTileMap;
+        this.preAttackTile = preAttackTile;
 
-    // Start is called before the first frame update
-    void Start() {
         walkableTileMap.CompressBounds();
-        roadTileMap.CompressBounds();
+        preAttackTileMap.CompressBounds();
         bounds = walkableTileMap.cellBounds;
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GameObject.FindGameObjectWithTag("Enemy");
@@ -44,21 +46,27 @@ public class BattleFieldController : MonoBehaviour {
             }
         }
     }
-    private void DrawRoad() {
-        for (int i = 0; i < roadPath.Count; i++) {
-            roadTileMap.SetTile(new Vector3Int(roadPath[i].X, roadPath[i].Y, 0), roadTile);
+
+    //Agarra las direcciones del Spell y en base a es pinta los tiles de roadTileMap TileMap
+    public void DrawPreAttack(GameObject reference, Spell spell) {
+        Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
+        foreach (Vector2 direction in spell.validDirections) {
+            for (int i = 0; i <= spell.maxDistance; i++) {
+                preAttackTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x) , gridReferencePos.y + (i * (int)direction.y) , 0), preAttackTile);
+            }
         }
     }
 
+
+
     // Update is called once per frame
     void Update() {
+        // if(walkableTileMap != null) {
+        //     Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
+        //     Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
+        //     roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
+        //     new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
+        // }
 
-        Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
-        Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
-
-        roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
-        new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
-
-        DrawRoad();
     }
 }

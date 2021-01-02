@@ -191,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995869670247659522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 0, z: 0}
+  m_LocalPosition: {x: -0.02, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 901108264}
@@ -238,7 +238,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 4022860278190058879, guid: 486f3498220e5fd4e891fec9776d1c62,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -326,12 +326,6 @@ MonoBehaviour:
   movementCooldown: 2
   spells:
   - {fileID: 6549004860323854262, guid: fcafa2b59bfc1234bb6a2d23c5a5bb6e, type: 3}
-  currDirectiion: {x: 0, y: 0}
-  combatController: {fileID: 0}
-  animator: {fileID: 0}
-  playerReference: {fileID: 0}
-  battleFieldReference: {fileID: 0}
-  actionSlider: {fileID: 0}
 --- !u!1 &1179463350431001921
 GameObject:
   m_ObjectHideFlags: 0
