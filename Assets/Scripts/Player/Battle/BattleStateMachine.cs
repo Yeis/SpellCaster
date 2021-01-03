@@ -22,10 +22,13 @@ public class BattleStateMachine : Character {
 
 public abstract class BattleState {
     protected Player Player;
+    protected UIController UserInterface;
+
     public PlayerState choice = PlayerState.Unknown;
 
-    public BattleState(Player player) {
+    public BattleState(Player player, UIController ui) {
         Player = player;
+        UserInterface = ui;
     }
 
     public virtual IEnumerator Start() {
