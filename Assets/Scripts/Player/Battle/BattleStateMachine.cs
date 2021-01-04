@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine.InputSystem;
+using System.ComponentModel;
 using UnityEngine;
 
 // TODO: Move this to a more appropriate place?
@@ -29,27 +30,22 @@ public abstract class BattleState {
     public BattleState(Player player, UIController ui) {
         Player = player;
         UserInterface = ui;
+
+        UserInterface.PropertyChanged += currentSpellChanged;
     }
 
     public virtual IEnumerator Start() {
         yield break;
     }
 
-    public virtual IEnumerator WaitForPlayerInput(Key[] keys) {
-        bool pressed = false;
-        while (!pressed) {
-            foreach (Key k in keys) {
-                if (Keyboard.current[k].wasPressedThisFrame) {
-                    pressed = true;
-                    SetChoiceTo(k);
-                    break;
-                }
-            }
-
-            yield return null;
-        }
+    public virtual IEnumerator WaitForMenuInput() {
+        yield break;
     }
 
-    public virtual void SetChoiceTo(Key key) { }
+    public virtual void currentSpellChanged(object sender, PropertyChangedEventArgs e) {
+        if (e.PropertyName == "CurrentSpell") {
+            Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, UserInterface.CurrentSpell);
+        }
+    }
 
 }

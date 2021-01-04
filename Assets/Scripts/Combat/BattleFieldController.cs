@@ -17,13 +17,12 @@ public class BattleFieldController : MonoBehaviour {
     List<Spot> roadPath = new List<Spot>();
     public Vector2Int start;
 
-    public void SetupGrid(Tilemap walkableTileMap, Tilemap roadTileMap, TileBase preAttackTile)
-    {
+    public void SetupGrid(Tilemap walkableTileMap, Tilemap roadTileMap, TileBase preAttackTile) {
         this.walkableTileMap = walkableTileMap;
         this.preAttackTileMap = roadTileMap;
         this.preAttackTile = preAttackTile;
     }
-    
+
     // Start is called before the first frame update
     void Start() {
         walkableTileMap.CompressBounds();
@@ -53,10 +52,12 @@ public class BattleFieldController : MonoBehaviour {
 
     //Agarra las direcciones del Spell y en base a es pinta los tiles de roadTileMap TileMap
     public void DrawPreAttack(GameObject reference, Spell spell) {
-        Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
-        foreach (Vector2 direction in spell.validDirections) {
-            for (int i = 0; i <= spell.maxDistance; i++) {
-                preAttackTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x) , gridReferencePos.y + (i * (int)direction.y) , 0), preAttackTile);
+        if (spell.spellName != "") {
+            Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
+            foreach (Vector2 direction in spell.validDirections) {
+                for (int i = 0; i <= spell.maxDistance; i++) {
+                    preAttackTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x), gridReferencePos.y + (i * (int)direction.y), 0), preAttackTile);
+                }
             }
         }
     }

@@ -562,8 +562,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e512244d00f4ac485c6e982f66991b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCooldown: 1
   characterName: MrYeis
   health: 50
   speed: 5
+  stockpile: {fileID: 0}
+  ui: {fileID: 0}
   spellBook:
   - {fileID: 5182079602971997597, guid: 1b8ca4bd166f6304e89fe69b15fdcd2e, type: 3}
+  direction: {x: 0, y: 0, z: 0}
+  customGUISkin: {fileID: 11400000, guid: ca179a739b4124bc3a4eeed9833119a6, type: 2}

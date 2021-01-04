@@ -16,8 +16,8 @@ public enum PlayerState {
 public class Player : BattleStateMachine {
     public string characterName = "MrYeis";
     public float health = 50, speed = 5f;
-    private float t = 0;
     public Spell stockpile = null;
+    public UIController ui;
 
     public List<Spell> spellBook;
     private Scene currentScene;
@@ -35,7 +35,7 @@ public class Player : BattleStateMachine {
     private bool hasMoved;
 
     private void Awake() {
-        if(GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
+        if (GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
             BattleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         }
         currentScene = SceneManager.GetActiveScene();
@@ -54,7 +54,7 @@ public class Player : BattleStateMachine {
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
         Animator = GetComponent<Animator>();
 
-        SetState(new CooldownState(this));
+        SetState(new CooldownState(this, ui));
     }
 
     void FixedUpdate() {
