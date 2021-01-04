@@ -90,25 +90,6 @@ public class Player : BattleStateMachine {
     private void OnGUI() {
         GUI.skin = customGUISkin;
         GUI.Label(new Rect(10, 10, 400, 50), "Current State: " + state);
-
-        switch (state) {
-            case PlayerState.Standby:
-                GUI.Label(new Rect(10, 60, 400, 50), "Go to Aim: Z");
-                GUI.Label(new Rect(10, 110, 400, 50), "Go to Move: X");
-                if (!(stockpile is null)) {
-                    GUI.Label(new Rect(10, 160, 400, 50), "Go to Cast Spell: C");
-                }
-                break;
-            case PlayerState.Move:
-                GUI.Label(new Rect(10, 60, 400, 50), "Move around using WASD");
-                break;
-            case PlayerState.Aim:
-                GUI.Label(new Rect(10, 60, 400, 50), "Confirm selection: .");
-                GUI.Label(new Rect(10, 110, 400, 50), "Go back: ,");
-                break;
-            default: break;
-        }
-
     }
     #endregion
 }
