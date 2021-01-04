@@ -19,6 +19,9 @@ public class BattleStateMachine : Character {
         StartCoroutine(currState.Start());
     }
 
+    public void StopStates() {
+        StopAllCoroutines();
+    }
 }
 
 public abstract class BattleState {
@@ -27,9 +30,9 @@ public abstract class BattleState {
 
     public PlayerState choice = PlayerState.Unknown;
 
-    public BattleState(Player player, UIController ui) {
+    public BattleState(Player player) {
         Player = player;
-        UserInterface = ui;
+        UserInterface = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UIController>(); ;
 
         UserInterface.PropertyChanged += currentSpellChanged;
     }

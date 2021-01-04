@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionState : BattleState {
-    public ActionState(Player player, UIController ui) : base(player, ui) { }
+    public ActionState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Action;
@@ -23,7 +23,7 @@ public class ActionState : BattleState {
                 // animacion de algo? si no esta este wait, y el spell termina en W, A, S, o D, 
                 // el maguito inmediatamente se mueve
                 yield return new WaitForSeconds(0.5f);
-                Player.SetState(new StandbyState(Player, UserInterface));
+                Player.SetState(new StandbyState(Player));
             }
             yield return null;
         }

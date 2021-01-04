@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CooldownState : BattleState {
     // TODO - handle different types of cooldown, implement Action enum? Move, Cast(SpellCost)
-    public CooldownState(Player player, UIController ui) : base(player, ui) { }
+    public CooldownState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Cooldown;
@@ -12,6 +12,6 @@ public class CooldownState : BattleState {
 
         yield return Cooldown.CountDown(Player, 1.5f);
 
-        Player.SetState(new StandbyState(Player, UserInterface));
+        Player.SetState(new StandbyState(Player));
     }
 }

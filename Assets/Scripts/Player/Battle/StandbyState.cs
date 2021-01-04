@@ -8,7 +8,7 @@ public interface UIControllerListener {
 }
 
 public class StandbyState : BattleState {
-    public StandbyState(Player player, UIController ui) : base(player, ui) { }
+    public StandbyState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Standby;
@@ -40,12 +40,12 @@ public class StandbyState : BattleState {
             if (Player.MovementInput.x != 0 || Player.MovementInput.y != 0) {
                 hasMoved = true;
                 Player.transform.position += movementVector;
-                Player.SetState(new CooldownState(Player, UserInterface));
+                Player.SetState(new CooldownState(Player));
             }
 
             // Menu input
             if (UserInterface.IsInAttackMenu) {
-                Player.SetState(new AimState(Player, UserInterface));
+                Player.SetState(new AimState(Player));
             }
             yield return null;
         }

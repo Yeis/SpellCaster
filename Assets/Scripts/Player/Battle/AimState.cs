@@ -4,7 +4,7 @@ using System.ComponentModel;
 using UnityEngine;
 
 public class AimState : BattleState {
-    public AimState(Player player, UIController ui) : base(player, ui) { }
+    public AimState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
 
@@ -19,9 +19,9 @@ public class AimState : BattleState {
     private IEnumerator WaitForMenuInput() {
         while (Player.StateEnum == PlayerState.Aim) {
             if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
-                Player.SetState(new StandbyState(Player, UserInterface));
+                Player.SetState(new StandbyState(Player));
             } else if (UserInterface.IsInTypingMode) {
-                Player.SetState(new ActionState(Player, UserInterface));
+                Player.SetState(new ActionState(Player));
             }
             yield return null;
         }

@@ -54,7 +54,7 @@ public class Player : BattleStateMachine {
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
         Animator = GetComponent<Animator>();
 
-        SetState(new CooldownState(this, ui));
+        SetState(new CooldownState(this));
     }
 
     void FixedUpdate() {
