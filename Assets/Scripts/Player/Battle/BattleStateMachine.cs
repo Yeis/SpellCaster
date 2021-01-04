@@ -38,10 +38,6 @@ public abstract class BattleState {
         yield break;
     }
 
-    public virtual IEnumerator WaitForMenuInput() {
-        yield break;
-    }
-
     public virtual void currentSpellChanged(object sender, PropertyChangedEventArgs e) {
         if (e.PropertyName == "CurrentSpell") {
             Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, UserInterface.CurrentSpell);

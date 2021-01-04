@@ -17,7 +17,7 @@ public class ActionState : BattleState {
         Player.stockpile = Player.spellBook[0];
     }
 
-    public override IEnumerator WaitForMenuInput() {
+    private IEnumerator WaitForMenuInput() {
         while (Player.StateEnum == PlayerState.Action) {
             if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
                 // animacion de algo? si no esta este wait, y el spell termina en W, A, S, o D, 

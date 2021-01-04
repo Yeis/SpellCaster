@@ -17,10 +17,10 @@ public class StandbyState : BattleState {
         // Remove Aiming UI in case we're coming back from the Aim state
         Player.BattleFieldController.RemovePreAttack();
 
-        yield return WaitForMenuInput();
+        yield return WaitForMenuInpuOrMovement();
     }
 
-    public override IEnumerator WaitForMenuInput() {
+    private IEnumerator WaitForMenuInpuOrMovement() {
         bool hasMoved = false;
 
         while (Player.StateEnum == PlayerState.Standby && !hasMoved) {

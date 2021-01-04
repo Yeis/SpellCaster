@@ -16,7 +16,7 @@ public class AimState : BattleState {
         yield return null;
     }
 
-    public override IEnumerator WaitForMenuInput() {
+    private IEnumerator WaitForMenuInput() {
         while (Player.StateEnum == PlayerState.Aim) {
             if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
                 Player.SetState(new StandbyState(Player, UserInterface));
