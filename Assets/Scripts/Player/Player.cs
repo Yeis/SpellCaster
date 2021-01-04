@@ -17,7 +17,6 @@ public class Player : BattleStateMachine {
     public string characterName = "MrYeis";
     public float health = 50, speed = 5f;
     public Spell stockpile = null;
-    public UIController ui;
 
     public List<Spell> spellBook;
     private Scene currentScene;
