@@ -12,8 +12,6 @@ public class FollowState : EnemyState {
         Vector2Int gridPlayerPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.PlayerReference.transform.position);
         Vector2Int gridEnemyPos = (Vector2Int)Enemy.BattleFieldReference.walkableTileMap.WorldToCell(Enemy.transform.position);
         List<Spot> path = Enemy.BattleFieldReference.astar.CreatePath(Enemy.BattleFieldReference.spots, gridEnemyPos, gridPlayerPos, 1000);
-        float i = 0.0f;
-        float rate = 1.0f / Enemy.speed;
 
         #region multiple steps in the same State
         //Movement logic taking a step evey second.
@@ -37,26 +35,15 @@ public class FollowState : EnemyState {
         #endregion
 
         #region 1 Step per State
-        Vector3 tempPosition = Enemy.transform.position;
-        Vector3 offsetPostion = tempPosition - Vector3Int.FloorToInt(Enemy.transform.position);
+        Vector3 offsetPostion = Enemy.transform.position - Vector3Int.FloorToInt(Enemy.transform.position);
         Vector3 destination = new Vector2(path[path.Count - 2].X + offsetPostion.x, path[path.Count - 2].Y + offsetPostion.y);
-        Enemy.CurrDirectiion = destination - tempPosition;
-        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirectiion.x);
-        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
+        Enemy.CurrDirection = destination - Enemy.transform.position;
+        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirection.x);
+        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirection.y);
         Enemy.Animator.SetBool("Moving", true);
-
-
-        while (i <= 1.0f) {
-            i += Time.deltaTime * rate;
-            Enemy.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
-            yield return null;
-        }
+        yield return Mover.MoveStep(Enemy.gameObject, destination, Enemy.speed);
         Enemy.Animator.SetBool("Moving", false);
         Enemy.SetState(new WaitState(Enemy));
         #endregion
     }
-
-
-
-
 }

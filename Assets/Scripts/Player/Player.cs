@@ -31,8 +31,11 @@ public class Player : BattleStateMachine {
     /// Movement 
     private Vector2 movementInput;
     public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
+    public bool HasMoved { get => hasMoved; set => hasMoved = value; }
+    public bool InBattle { get => inBattle; set => inBattle = value; }
+
     public Vector3 direction = new Vector3();
-    private bool hasMoved;
+    private bool hasMoved, inBattle = false;
 
     private void Awake() {
         if(GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
@@ -54,21 +57,20 @@ public class Player : BattleStateMachine {
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
         Animator = GetComponent<Animator>();
 
-        SetState(new CooldownState(this));
+        // SetState(new CooldownState(this));
     }
 
     void FixedUpdate() {
         /// Movement - Should be deprecated by state machine
-        if (!currentScene.name.Contains("Battle")) {
+        if (!InBattle) {
             direction = GetMovementDirection();
+            transform.position += direction;
         }
-
-        transform.position += direction;
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        // transform.position -= direction;
+        transform.position -= direction;
     }
 
     // Should be deprecated by state machine

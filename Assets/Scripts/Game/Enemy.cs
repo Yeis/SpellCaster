@@ -9,13 +9,13 @@ public class Enemy : EnemyStateMachine {
 
     //Private Fields
     private CombatController combatController;
-    private Vector2 currDirectiion;
+    private Vector2 currDirection;
     private Animator animator;
     private GameObject playerReference;
     private BattleFieldController battleFieldReference;
     private GameObject actionSlider;
     public CombatController CombatController { get => combatController; set => combatController = value; }
-    public Vector2 CurrDirectiion { get => currDirectiion; set => currDirectiion = value; }
+    public Vector2 CurrDirection { get => currDirection; set => currDirection = value; }
     public Animator Animator { get => animator; set => animator = value; }
     public GameObject PlayerReference { get => playerReference; set => playerReference = value; }
     public BattleFieldController BattleFieldReference { get => battleFieldReference; set => battleFieldReference = value; }
@@ -28,7 +28,7 @@ public class Enemy : EnemyStateMachine {
         ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
         CombatController = GetComponent<CombatController>();
         Animator = GetComponent<Animator>();
-        CurrDirectiion = Direction.Down;
+        CurrDirection = Direction.Down;
         SetState(new WaitState(this));
     }
 }

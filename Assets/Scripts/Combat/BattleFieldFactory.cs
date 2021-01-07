@@ -26,8 +26,8 @@ public class BattleFieldFactory : MonoBehaviour
         //Setup of walkable layer
         if(isBattleFieldEnabled) return;
         isBattleFieldEnabled = true;
-        walkableTilemap = createTileMap("Walkable_TileMap", mainGrid, 100);
-        preAttackTilemap = createTileMap("PreAttack_TileMap", mainGrid, 100);
+        walkableTilemap = createTileMap("Walkable_TileMap", mainGrid, 5);
+        preAttackTilemap = createTileMap("PreAttack_TileMap", mainGrid, 5);
   
         Vector3Int startingPosition = (position + direction);
         Stack<Vector3Int> stack = new Stack<Vector3Int>();
@@ -39,8 +39,8 @@ public class BattleFieldFactory : MonoBehaviour
             Vector3Int currPosition = stack.Pop();
             if(canPlaceTileInPosition(currPosition)){
                 //Might change tile 
-                preAttackTilemap.SetTile(currPosition, walkableTile);
-                walkableTilemap.SetTile(currPosition, walkableTile);
+                preAttackTilemap.SetTile(currPosition, backgroundTilemap.GetTile(currPosition));
+                walkableTilemap.SetTile(currPosition, backgroundTilemap.GetTile(currPosition));
             }
     
             //left
@@ -85,7 +85,7 @@ public class BattleFieldFactory : MonoBehaviour
         GameObject walkableTilemap = new GameObject("Walkable_TileMap");
         walkableTilemap.AddComponent<Tilemap>();
         TilemapRenderer tilemapRenderer = walkableTilemap.AddComponent<TilemapRenderer>();
-        tilemapRenderer.sortingOrder = 100;
+        tilemapRenderer.sortingOrder = 2;
         walkableTilemap.transform.SetParent(mainGrid.transform);
         return walkableTilemap;
     }
@@ -98,49 +98,22 @@ public class BattleFieldFactory : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         //Calculate collision direction
+        Player player = other.gameObject.GetComponent<Player>();
+        player.InBattle = false;
         //Directio is comes in .1 intervals
-        Vector3 colDirection = other.gameObject.GetComponent<Player>().direction * 20;
-        InitializeBattleField(Vector3Int.FloorToInt(other.transform.position),Vector3Int.RoundToInt(colDirection));
+        Vector3Int colDirection = Vector3Int.RoundToInt(player.direction * 20);
+        InitializeBattleField(Vector3Int.FloorToInt(other.transform.position), colDirection);
+
+        StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
     }
 
     
     //TODO: Based this from Maguito State Machine
-    // private IEnumerator InitializePlayerPositions(GameObject player, Vector3Int direction){
-    //     //Move past event zone to be inside battle Walkable tile map layer
-    //     float battleSetupMovementSpeed = 2.0f;
-    //     float i = 0.0f;
-    //     float rate = 1.0f / battleSetupMovementSpeed;
-    //     Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
-    //     Vector3 tempPosition = player.transform.position;
-    //     Vector3 offsetPostion = tempPosition - floorPosition;
-    //     Vector3 destination = player.transform.position + direction;
-    //     while (i <= 1.0f) {
-    //         i += Time.deltaTime * rate;
-    //         player.transform.position = Vector2.MoveTowards(tempPosition, destination + offsetPostion, i);
-    //         yield return null;
-    //      }
-       
-    //      Vector2Int gridPlayerPos = (Vector2Int)battleFieldController.walkableTileMap.WorldToCell(player.transform.position);
-    //     Vector2Int gridDestination = new Vector2Int(gridPlayerPos.x - 2 , gridPlayerPos.y - 2);
-    //     List<Spot> spots = battleFieldController.astar.CreatePath(battleFieldController.spots, gridPlayerPos, gridDestination, 1000);
-
-
-    //     for (int j = spots.Count - 1; j >= 0; j--)
-    //     {
-    //         i = 0.0f;
-    //         floorPosition = Vector3Int.FloorToInt(player.transform.position);
-    //         tempPosition = player.transform.position;
-    //         offsetPostion =  tempPosition - floorPosition;
-    //         while (i <= 1.0f)
-    //         {
-    //             i += Time.deltaTime * rate;
-    //             player.transform.position = Vector2.MoveTowards(tempPosition, new Vector2(spots[j].X + offsetPostion.x, spots[j].Y + offsetPostion.y), i);
-    //             yield return null;
-    //         }
-    //         //Wait one second between movement
-    //         Enemy.print("J:" + j);
-    //         yield return new WaitForSeconds(1f);
-    //     }
-
-    // }
+    private IEnumerator InitializePlayerPositions(GameObject player, Vector3Int direction){
+        // Move past event zone to be inside battle Walkable tile map layer
+        float battleSetupMovementSpeed = 2.0f;
+        Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
+        Vector3 destination = floorPosition + direction;
+        yield return Mover.MovePath(player, destination, battleSetupMovementSpeed);
+    }
 }
