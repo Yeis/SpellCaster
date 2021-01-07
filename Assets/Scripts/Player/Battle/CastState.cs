@@ -7,6 +7,7 @@ public class CastState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Cast;
+        UserInterface.StateEnum = PlayerState.Cast;
 
         // TODO - Spell animation
         yield return new WaitForSeconds(1f);

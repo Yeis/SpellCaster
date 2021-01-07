@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine.InputSystem;
+using System.ComponentModel;
 using UnityEngine;
 
 // TODO: Move this to a more appropriate place?
@@ -18,35 +19,32 @@ public class BattleStateMachine : Character {
         StartCoroutine(currState.Start());
     }
 
+    public void StopStates() {
+        StopAllCoroutines();
+    }
 }
 
 public abstract class BattleState {
     protected Player Player;
+    protected UIController UserInterface;
+
     public PlayerState choice = PlayerState.Unknown;
 
     public BattleState(Player player) {
         Player = player;
+        UserInterface = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UIController>(); ;
+
+        UserInterface.PropertyChanged += currentSpellChanged;
     }
 
     public virtual IEnumerator Start() {
         yield break;
     }
 
-    public virtual IEnumerator WaitForPlayerInput(Key[] keys) {
-        bool pressed = false;
-        while (!pressed) {
-            foreach (Key k in keys) {
-                if (Keyboard.current[k].wasPressedThisFrame) {
-                    pressed = true;
-                    SetChoiceTo(k);
-                    break;
-                }
-            }
-
-            yield return null;
+    public virtual void currentSpellChanged(object sender, PropertyChangedEventArgs e) {
+        if (e.PropertyName == "CurrentSpell") {
+            Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, UserInterface.CurrentSpell);
         }
     }
-
-    public virtual void SetChoiceTo(Key key) { }
 
 }

@@ -8,6 +8,7 @@ public class CooldownState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Cooldown;
+        UserInterface.StateEnum = PlayerState.Cooldown;
 
         yield return Cooldown.CountDown(Player, 1.5f);
 

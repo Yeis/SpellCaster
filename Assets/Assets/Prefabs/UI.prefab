@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 2175088376523330352}
   m_Layer: 5
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: UserInterface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +816,6 @@ MonoBehaviour:
   padding: 50
   font: {fileID: 12800000, guid: c56c8eaeffe024142b8cf65b047133aa, type: 3}
   currentCommand: 
-  currentSpell: 
   currentMenuIndex: 0
   currentSpellIndex: 0
 --- !u!114 &655828303
@@ -846,7 +845,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

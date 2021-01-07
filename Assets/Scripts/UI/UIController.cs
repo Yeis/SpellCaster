@@ -3,23 +3,38 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using System.ComponentModel;
 using System;
 
-public class UIController : MonoBehaviour {
+public class UIController : MonoBehaviour, INotifyPropertyChanged {
     public List<string> commands;
     public List<Text> commandLabels, spellLabels;
+    private List<Spell> spellList;
     private Text attackLabel, spellLabel;
     public float padding = 50f;
     public Font font;
     private GameObject mainOptionsPanel, spellOptionsPanel;
     private Image selector, attackSelector;
-    public string currentCommand, currentSpell;
+    public string currentCommand;
+    private Spell currentSpell;
     public int currentMenuIndex, currentSpellIndex;
     private bool isInAttackMenu = false, isInTypingMode = false;
     private float initialYSelectorPosition, inputDelay;
-    private Vector2 navigation;
     private Animator animator;
+    private bool isEnabled;
 
+    private PlayerState state = PlayerState.Unknown;
+    public PlayerState StateEnum { get => state; set => state = value; }
+    public bool IsInAttackMenu { get => isInAttackMenu; }
+    public bool IsInTypingMode { get => isInTypingMode; }
+
+    public Spell CurrentSpell {
+        get => currentSpell;
+        set {
+            currentSpell = value;
+            OnPropertyChanged("CurrentSpell");
+        }
+    }
 
     private void OnEnable() {
         Keyboard.current.onTextInput += HandleTypingInput;
@@ -50,7 +65,7 @@ public class UIController : MonoBehaviour {
         currentSpellIndex = 0;
         currentMenuIndex = 0;
         currentCommand = commands[0];
-        spellLabel.text = currentSpell;
+        spellLabel.text = "";
         foreach (string command in commands) {
             GameObject textLabel = new GameObject(command + "_Label");
             textLabel.transform.SetParent(mainOptionsPanel.transform);
@@ -65,6 +80,7 @@ public class UIController : MonoBehaviour {
             commandLabels.Add(text);
         }
 
+        spellList = player.spellBook;
         foreach (Spell spell in player.spellBook) {
             GameObject textLabel = new GameObject(spell.spellName + "_Label");
             textLabel.transform.SetParent(spellOptionsPanel.transform);
@@ -80,20 +96,37 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
     void Update() {
-        HandleMenuInput();
+        //Set selector position to be left of the command 
+        float newYPosition;
+        if (isInAttackMenu) {
+            newYPosition = spellLabels[currentMenuIndex].rectTransform.position.y;
+            attackSelector.rectTransform.position = new Vector3(attackSelector.rectTransform.position.x, newYPosition, attackSelector.rectTransform.position.z);
+        } else {
+            newYPosition = commandLabels[currentMenuIndex].rectTransform.position.y;
+            selector.rectTransform.position = new Vector3(selector.rectTransform.position.x, newYPosition, selector.rectTransform.position.z);
+        }
+
+        switch (state) {
+            case PlayerState.Cooldown:
+                isEnabled = false;
+                break;
+            case PlayerState.Standby:
+                isEnabled = true;
+                break;
+            default: break;
+        }
     }
 
     private void HandleTypingInput(char letter) {
         if (isInTypingMode) {
             print("CurrentSpellIndex: " + currentSpellIndex);
             //Correct Letter
-            if (currentSpell.Length > currentSpellIndex && currentSpell[currentSpellIndex] == letter) {
+            if (currentSpell.spellName.Length > currentSpellIndex && currentSpell.spellName[currentSpellIndex] == letter) {
                 print("Correct Letter");
                 UpdateSpellLabel(++currentSpellIndex);
 
-                if (currentSpellIndex == spellLabel.text.Length) {
+                if (currentSpellIndex == currentSpell.spellName.Length) {
                     ResetHUD();
                 }
             }
@@ -106,70 +139,66 @@ public class UIController : MonoBehaviour {
         isInTypingMode = false;
         currentMenuIndex = 0;
         currentSpellIndex = 0;
-        currentSpell = "";
-        spellLabel.text = currentSpell;
+        CurrentSpell = new Spell();
+        spellLabel.text = "";
     }
 
     private void UpdateSpellLabel(int i) {
-        spellLabel.text = "<color=red>" + currentSpell.Substring(0, i) + "</color>" + currentSpell.Substring(i, currentSpell.Length - i);
+        spellLabel.text = "<color=red>" + currentSpell.spellName.Substring(0, i) + "</color>" + currentSpell.spellName.Substring(i, currentSpell.spellName.Length - i);
     }
 
-    private void HandleMenuInput() {
-        if (Keyboard.current[Key.Space].wasPressedThisFrame ||
-                Keyboard.current[Key.RightArrow].wasPressedThisFrame ||
-                Keyboard.current[Key.Enter].wasPressedThisFrame) {
-            if (isInAttackMenu) {
-                isInTypingMode = true;
-                ToggleAttackSubMenu(false);
-                currentSpell = spellLabels[currentMenuIndex].text;
-                spellLabel.text = currentSpell;
-                currentSpellIndex = 0;
-            } else if (!isInTypingMode) {
-                ToggleAttackSubMenu(true);
-                currentMenuIndex = 0;
-            }
-        } else if (Keyboard.current[Key.LeftArrow].wasPressedThisFrame) {
-            if (isInAttackMenu) {
-                ToggleAttackSubMenu(false);
-                currentMenuIndex = 0;
-            }
-            //If we want to allow going back once spell is selected
-            // else if (isInTypingMode)
-            // {
-            //     isInTypingMode = false;
-            //     ToggleAttackSubMenu(true);
-            //     currentMenuIndex = 0;
-            //     currentSpellIndex = 0;
-            // }
+    public void OnSubmit(InputValue value) {
+        MenuForward();
+    }
 
-        } else if (navigation.y > 0) {
-            if (isInAttackMenu) {
-                currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % spellLabels.Count, 0);
-            } else {
-                currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % commands.Count, 0);
-            }
-
-        } else if (navigation.y < 0) {
-            if (isInAttackMenu) {
-                currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, spellLabels.Count - 1);
-            } else {
-                currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, commands.Count - 1);
-            }
-        }
-
-        //Set selector position to be left of the command 
-        float newYPosition;
-        if (isInAttackMenu) {
-            newYPosition = spellLabels[currentMenuIndex].rectTransform.position.y;
-            attackSelector.rectTransform.position = new Vector3(attackSelector.rectTransform.position.x, newYPosition, attackSelector.rectTransform.position.z);
-        } else {
-            newYPosition = commandLabels[currentMenuIndex].rectTransform.position.y;
-            selector.rectTransform.position = new Vector3(selector.rectTransform.position.x, newYPosition, selector.rectTransform.position.z);
-        }
+    public void OnCancel(InputValue value) {
+        MenuBackward();
     }
 
     public void OnNavigate(InputValue value) {
-        navigation = value.Get<Vector2>();
+        if (isEnabled) {
+            var nav = value.Get<Vector2>();
+            if (nav.x > 0) { // forward
+                MenuForward();
+            } else if (nav.x < 0) { // back
+                MenuBackward();
+            } else if (nav.y > 0) { // up
+                if (isInAttackMenu) {
+                    currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % spellLabels.Count, 0);
+                    CurrentSpell = spellList[currentMenuIndex];
+                } else {
+                    currentMenuIndex = Mathf.Max((currentMenuIndex - 1) % commands.Count, 0);
+                }
+            } else if (nav.y < 0) { // down
+                if (isInAttackMenu) {
+                    currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, spellLabels.Count - 1);
+                    CurrentSpell = spellList[currentMenuIndex];
+                } else {
+                    currentMenuIndex = Mathf.Clamp(currentMenuIndex + 1, 0, commands.Count - 1);
+                }
+            }
+
+        }
+    }
+
+    private void MenuForward() {
+        if (isInAttackMenu) {
+            isInTypingMode = true;
+            ToggleAttackSubMenu(false);
+            spellLabel.text = currentSpell.spellName;
+            currentSpellIndex = 0;
+        } else if (!isInTypingMode) {
+            ToggleAttackSubMenu(true);
+            currentMenuIndex = 0;
+            CurrentSpell = spellList[currentMenuIndex];
+        }
+    }
+
+    private void MenuBackward() {
+        if (isInAttackMenu) {
+            ToggleAttackSubMenu(false);
+            currentMenuIndex = 0;
+        }
     }
 
     private void ToggleAttackSubMenu(bool toogle) {
@@ -178,4 +207,13 @@ public class UIController : MonoBehaviour {
         spellOptionsPanel.SetActive(toogle);
         attackLabel.enabled = toogle;
     }
+
+    // INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+    private void OnPropertyChanged(string propertyName) {
+        if (PropertyChanged != null) {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
 }

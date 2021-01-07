@@ -16,7 +16,6 @@ public enum PlayerState {
 public class Player : BattleStateMachine {
     public string characterName = "MrYeis";
     public float health = 50, speed = 5f;
-    private float t = 0;
     public Spell stockpile = null;
 
     public List<Spell> spellBook;
@@ -38,7 +37,7 @@ public class Player : BattleStateMachine {
     private bool hasMoved, inBattle = false;
 
     private void Awake() {
-        if(GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
+        if (GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
             BattleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         }
         currentScene = SceneManager.GetActiveScene();
@@ -92,25 +91,6 @@ public class Player : BattleStateMachine {
     private void OnGUI() {
         GUI.skin = customGUISkin;
         GUI.Label(new Rect(10, 10, 400, 50), "Current State: " + state);
-
-        switch (state) {
-            case PlayerState.Standby:
-                GUI.Label(new Rect(10, 60, 400, 50), "Go to Aim: Z");
-                GUI.Label(new Rect(10, 110, 400, 50), "Go to Move: X");
-                if (!(stockpile is null)) {
-                    GUI.Label(new Rect(10, 160, 400, 50), "Go to Cast Spell: C");
-                }
-                break;
-            case PlayerState.Move:
-                GUI.Label(new Rect(10, 60, 400, 50), "Move around using WASD");
-                break;
-            case PlayerState.Aim:
-                GUI.Label(new Rect(10, 60, 400, 50), "Confirm selection: .");
-                GUI.Label(new Rect(10, 110, 400, 50), "Go back: ,");
-                break;
-            default: break;
-        }
-
     }
     #endregion
 }
