@@ -1,43 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine.InputSystem;
+using System.ComponentModel;
 using UnityEngine;
 
 public class AimState : BattleState {
     public AimState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
+
         Player.StateEnum = PlayerState.Aim;
-
-        // Draw selected spell, for now we will always use fire
-        Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, Player.spellBook[0]);
-
-        yield return WaitForPlayerInput(new Key[] { Key.Period, Key.Comma });
+        UserInterface.StateEnum = PlayerState.Aim;
+        yield return WaitForMenuInput();
 
         // Player has made a choice, erase spell range
-
-        switch (choice) {
-            case PlayerState.Action:
-                Player.SetState(new ActionState(Player));
-                break;
-            case PlayerState.Standby:
-                Player.SetState(new StandbyState(Player));
-                break;
-            default:
-                break;
-        }
-
         yield return null;
     }
 
-    public override void SetChoiceTo(Key key) {
-        switch (key) {
-            case (Key.Period):
-                choice = PlayerState.Action;
-                break;
-            case (Key.Comma):
-                choice = PlayerState.Standby;
-                break;
+    private IEnumerator WaitForMenuInput() {
+        while (Player.StateEnum == PlayerState.Aim) {
+            if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
+                Player.SetState(new StandbyState(Player));
+            } else if (UserInterface.IsInTypingMode) {
+                Player.SetState(new ActionState(Player));
+            }
+            yield return null;
         }
     }
 
+    public override void currentSpellChanged(object sender, PropertyChangedEventArgs e) {
+        if (e.PropertyName == "CurrentSpell") {
+            Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, UserInterface.CurrentSpell);
+        }
+    }
 }

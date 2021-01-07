@@ -23,4 +23,12 @@ public class Spell : MonoBehaviour {
         this.Direction = direction;
         this.validDirections = validDirections;
     }
+
+    public Spell() {
+        this.spellName = "";
+        this.damage = 0.0f;
+        this.maxDistance = 0;
+        this.castingTime = 0;
+        this.type = SpellType.Unknown;
+    }
 }

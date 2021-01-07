@@ -3,47 +3,52 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface UIControllerListener {
+    void wantsToAim();
+}
+
 public class StandbyState : BattleState {
     public StandbyState(Player player) : base(player) { }
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Standby;
+        UserInterface.StateEnum = PlayerState.Standby;
 
         // Remove Aiming UI in case we're coming back from the Aim state
         Player.BattleFieldController.RemovePreAttack();
 
-        yield return WaitForPlayerInput(new Key[] { Key.Z, Key.X, Key.C });
+        yield return WaitForMenuInpuOrMovement();
+    }
 
-        switch (choice) {
-            case PlayerState.Aim:
+    private IEnumerator WaitForMenuInpuOrMovement() {
+        bool hasMoved = false;
+
+        while (Player.StateEnum == PlayerState.Standby && !hasMoved) {
+
+            // Movement
+            Vector3 movementVector = new Vector3(0, 0, 0);
+            if (Player.MovementInput.x < 0) {
+                movementVector = new Vector3(-1, 0, 0);
+            } else if (Player.MovementInput.x > 0) {
+                movementVector = new Vector3(1, 0, 0);
+            } else if (Player.MovementInput.y < 0) {
+                movementVector = new Vector3(0, -1);
+            } else if (Player.MovementInput.y > 0) {
+                movementVector = new Vector3(0, 1);
+            }
+
+            if (Player.MovementInput.x != 0 || Player.MovementInput.y != 0) {
+                hasMoved = true;
+                Player.transform.position += movementVector;
+                Player.SetState(new CooldownState(Player));
+            }
+
+            // Menu input
+            if (UserInterface.IsInAttackMenu) {
                 Player.SetState(new AimState(Player));
-                break;
-            case PlayerState.Move:
-                Player.SetState(new MoveState(Player));
-                break;
-            case PlayerState.Cast:
-                Player.SetState(new CastState(Player));
-                break;
-            default:
-                break;
-        }
-
-        yield return null;
-    }
-
-    public override void SetChoiceTo(Key key) {
-        switch (key) {
-            case (Key.Z):
-                choice = PlayerState.Aim;
-                break;
-            case (Key.X):
-                choice = PlayerState.Move;
-                break;
-            case (Key.C):
-                if (!(Player.stockpile is null)) {
-                    choice = PlayerState.Cast;
-                }
-                break;
+            }
+            yield return null;
         }
     }
+
 }

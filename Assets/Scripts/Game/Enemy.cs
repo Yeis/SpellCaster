@@ -13,7 +13,6 @@ public class Enemy : EnemyStateMachine {
     private Animator animator;
     private GameObject playerReference;
     private BattleFieldController battleFieldReference;
-    private GameObject actionSlider;
     public CombatController CombatController { get => combatController; set => combatController = value; }
     public Vector2 CurrDirectiion { get => currDirectiion; set => currDirectiion = value; }
     public Animator Animator { get => animator; set => animator = value; }
