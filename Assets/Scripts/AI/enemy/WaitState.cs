@@ -10,8 +10,8 @@ public class WaitState : EnemyState {
 
     public override IEnumerator Start() {
         Enemy.print("WaitState");
-        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirectiion.x);
-        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirectiion.y);
+        Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirection.x);
+        Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirection.y);
         
         yield return Cooldown.CountDown(Enemy, .98f);
 
@@ -31,25 +31,25 @@ public class WaitState : EnemyState {
         //Check Right
         if (gridPlayerPos.y == gridEnemyPos.y && Mathf.Abs(gridEnemyPos.x - gridPlayerPos.x) <= spell.maxDistance && gridEnemyPos.x < gridPlayerPos.x) {
             Enemy.print("Attacking Right");
-            Enemy.CurrDirectiion = Direction.Right;
+            Enemy.CurrDirection = Direction.Right;
             return true;
         }
         //Check Left
         else if (gridPlayerPos.y == gridEnemyPos.y && Mathf.Abs(gridEnemyPos.x - gridPlayerPos.x) <= spell.maxDistance && gridEnemyPos.x > gridPlayerPos.x) {
             Enemy.print("Attacking Left");
-            Enemy.CurrDirectiion = Direction.Left;
+            Enemy.CurrDirection = Direction.Left;
             return true;
         }
         //Check Down
         else if (gridPlayerPos.x == gridEnemyPos.x && Mathf.Abs(gridEnemyPos.y - gridPlayerPos.y) <= spell.maxDistance && gridEnemyPos.y > gridPlayerPos.y) {
             Enemy.print("Attacking Down");
-            Enemy.CurrDirectiion = Direction.Down;
+            Enemy.CurrDirection = Direction.Down;
             return true;
         }
         //Check Up
         else if (gridPlayerPos.x == gridEnemyPos.x && Mathf.Abs(gridEnemyPos.y - gridPlayerPos.y) <= spell.maxDistance && gridEnemyPos.y < gridPlayerPos.y) {
             Enemy.print("Attacking Up");
-            Enemy.CurrDirectiion = Direction.Up;
+            Enemy.CurrDirection = Direction.Up;
             return true;
         }
         return false;
