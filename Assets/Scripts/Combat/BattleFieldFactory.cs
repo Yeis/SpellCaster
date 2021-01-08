@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEditor;
 using System;
 
 public class BattleFieldFactory : MonoBehaviour
 {
     public Tilemap mainTilemap;
     public TileBase walkableTile;
-    public GameObject UIPrefab;
     private BattleFieldController battleFieldController;
     //All Tilemaps needed;
     private Tilemap walkableTilemap, preAttackTilemap, backgroundTilemap, colliderTilemap, eventsTileMmap;
     private GameObject mainGrid;
     private bool isBattleFieldEnabled;
+    private UIController uIController;
 
     private void Start() {
         mainGrid = GameObject.Find("Grid");
         backgroundTilemap = mainGrid.transform.Find("Background_TileMap").gameObject.GetComponent<Tilemap>();
         colliderTilemap = mainGrid.transform.Find("Collider_Tilemap").gameObject.GetComponent<Tilemap>();
         eventsTileMmap = gameObject.GetComponent<Tilemap>();
+
+        uIController = GameObject.Find("UI").GetComponent<UIController>();
     }
 
     public void InitializeBattleField(Vector3Int position, Vector3Int direction){
@@ -62,12 +65,11 @@ public class BattleFieldFactory : MonoBehaviour
         }
 
         //Setup of BattleFieldController &UI
-            GameObject battlefieldGameObject = new GameObject("BattleFieldReference");
-            battleFieldController =  battlefieldGameObject.AddComponent<BattleFieldController>();
-            battleFieldController.SetupGrid(walkableTilemap, preAttackTilemap, walkableTile);
-        
-            GameObject UI = Instantiate(UIPrefab, Vector3.zero, Quaternion.identity);
-            UI.name = "UI";
+        GameObject battlefieldGameObject = new GameObject("BattleFieldReference");
+        battleFieldController =  battlefieldGameObject.AddComponent<BattleFieldController>();
+        battleFieldController.SetupGrid(walkableTilemap, preAttackTilemap, walkableTile);
+    
+        uIController.EnableUI();
     }
 
 
@@ -99,11 +101,12 @@ public class BattleFieldFactory : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         //Calculate collision direction
         Player player = other.gameObject.GetComponent<Player>();
-        player.InBattle = false;
-        //Directio is comes in .1 intervals
+   
+        //Direction  comes in .1 intervals
         Vector3Int colDirection = Vector3Int.RoundToInt(player.direction * 20);
         InitializeBattleField(Vector3Int.FloorToInt(other.transform.position), colDirection);
-
+        player.InBattle = true;
+        player.BattleFieldController = battleFieldController;
         StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
     }
 
@@ -111,9 +114,18 @@ public class BattleFieldFactory : MonoBehaviour
     //TODO: Based this from Maguito State Machine
     private IEnumerator InitializePlayerPositions(GameObject player, Vector3Int direction){
         // Move past event zone to be inside battle Walkable tile map layer
+        Animator playerAnimator = player.GetComponent<Player>().Animator;
+        playerAnimator.SetFloat("Horizontal", direction.x);
+        playerAnimator.SetFloat("Vertical", direction.y);
         float battleSetupMovementSpeed = 2.0f;
         Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
         Vector3 destination = floorPosition + direction;
         yield return Mover.MovePath(player, destination, battleSetupMovementSpeed);
+        playerAnimator.SetFloat("Horizontal", 0);
+        playerAnimator.SetFloat("Vertical", 0);
+
+        //Standby
+        player.GetComponent<Player>().SetState(new CooldownState(player.GetComponent<Player>()));
+        yield return null;
     }
 }

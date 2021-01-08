@@ -68,10 +68,10 @@ public class BattleFieldController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
-        Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
+        // Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
+        // Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
-        roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
-        new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
+        // roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
+        // new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
     }
 }

@@ -24,7 +24,7 @@ public class StandbyState : BattleState {
         bool hasMoved = false;
 
         while (Player.StateEnum == PlayerState.Standby && !hasMoved) {
-
+ 
             // Movement
             Vector3 movementVector = new Vector3(0, 0, 0);
             if (Player.MovementInput.x < 0) {

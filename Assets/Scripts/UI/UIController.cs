@@ -48,7 +48,6 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     void Start() {
         //Trigger Animation
         animator = GetComponent<Animator>();
-        animator.SetTrigger("EnableUI");
 
         //Get all UI References
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -106,7 +105,6 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
             newYPosition = commandLabels[currentMenuIndex].rectTransform.position.y;
             selector.rectTransform.position = new Vector3(selector.rectTransform.position.x, newYPosition, selector.rectTransform.position.z);
         }
-
         switch (state) {
             case PlayerState.Cooldown:
                 isEnabled = false;
@@ -133,6 +131,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         }
     }
 
+
     private void ResetHUD() {
         print("ResetHUD");
         ToggleAttackSubMenu(false);
@@ -156,7 +155,10 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     }
 
     public void OnNavigate(InputValue value) {
+        print("Aqui andamos 1");
+
         if (isEnabled) {
+            print("Aqui andamos 2");
             var nav = value.Get<Vector2>();
             if (nav.x > 0) { // forward
                 MenuForward();
@@ -179,6 +181,17 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
             }
 
         }
+    }
+
+    public void EnableUI(){
+        animator.SetTrigger("EnableUI");
+        isEnabled = true;
+    }
+
+
+    public void DisableUI() {
+        animator.SetTrigger("DisableUI");
+        isEnabled = false;
     }
 
     private void MenuForward() {

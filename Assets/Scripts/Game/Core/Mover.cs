@@ -22,7 +22,7 @@ public class Mover   {
         float rate = 1.0f / speed;
         Vector3 tempPosition = gameObject.transform.position;
 
-        while (tempPosition != destination) {
+        while (gameObject.transform.position != destination) {
             i += Time.deltaTime * rate;
             gameObject.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
             yield return null;
