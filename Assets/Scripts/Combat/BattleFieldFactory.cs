@@ -111,7 +111,6 @@ public class BattleFieldFactory : MonoBehaviour
             player.BattleFieldController = battleFieldController;
             StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
         }
-
     }
 
     
