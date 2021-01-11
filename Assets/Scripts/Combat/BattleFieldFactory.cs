@@ -99,15 +99,19 @@ public class BattleFieldFactory : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
-        //Calculate collision direction
-        Player player = other.gameObject.GetComponent<Player>();
-   
-        //Direction  comes in .1 intervals
-        Vector3Int colDirection = Vector3Int.RoundToInt(player.direction * 20);
-        InitializeBattleField(Vector3Int.FloorToInt(other.transform.position), colDirection);
-        player.InBattle = true;
-        player.BattleFieldController = battleFieldController;
-        StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
+        if(!isBattleFieldEnabled) {
+            //Close exit area
+            eventsTileMmap.GetComponent<TilemapCollider2D>().isTrigger = false;
+            //Calculate collision direction
+            Player player = other.gameObject.GetComponent<Player>();
+            //Direction  comes in .1 intervals
+            Vector3Int colDirection = Vector3Int.RoundToInt(player.direction * 20);
+            InitializeBattleField(Vector3Int.FloorToInt(other.transform.position), colDirection);
+            player.InBattle = true;
+            player.BattleFieldController = battleFieldController;
+            StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
+        }
+
     }
 
     
@@ -117,9 +121,12 @@ public class BattleFieldFactory : MonoBehaviour
         Animator playerAnimator = player.GetComponent<Player>().Animator;
         playerAnimator.SetFloat("Horizontal", direction.x);
         playerAnimator.SetFloat("Vertical", direction.y);
-        float battleSetupMovementSpeed = 2.0f;
+        float battleSetupMovementSpeed = 1.0f;
         Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
-        Vector3 destination = floorPosition + direction;
+        Vector3 offsetVector = new Vector3(0.5f,0.0f,0.0f);
+        Vector3 destination = floorPosition + direction + offsetVector;
+        print("Direction: " + direction);
+        print("Destination: " + destination);
         yield return Mover.MovePath(player, destination, battleSetupMovementSpeed);
         playerAnimator.SetFloat("Horizontal", 0);
         playerAnimator.SetFloat("Vertical", 0);
