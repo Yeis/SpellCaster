@@ -11,7 +11,7 @@ public class StandbyState : BattleState {
         UserInterface.StateEnum = PlayerState.Standby;
 
         // Remove Aiming UI in case we're coming back from the Aim state
-        Player.BattleFieldController.RemovePreAttack();
+        Player.BattleFieldController.ClearPreAttack();
 
         yield return WaitForMenuInpuOrMovement();
     }

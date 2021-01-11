@@ -55,15 +55,15 @@ public class BattleFieldController : MonoBehaviour {
         if (spell.spellName != "") {
             Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
             foreach (Vector2 direction in spell.validDirections) {
-                for (int i = 0; i <= spell.maxDistance; i++) {
+                for (int i = 1; i <= spell.maxDistance; i++) {
                     preAttackTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x), gridReferencePos.y + (i * (int)direction.y), 0), preAttackTile);
                 }
             }
         }
     }
 
-    public void RemovePreAttack() {
-        // TODO
+    public void ClearPreAttack() {
+        preAttackTileMap.ClearAllTiles();
     }
 
     // Update is called once per frame

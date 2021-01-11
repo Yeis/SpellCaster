@@ -8,7 +8,7 @@ using System;
 public class BattleFieldFactory : MonoBehaviour
 {
     public Tilemap mainTilemap;
-    public TileBase walkableTile;
+    public TileBase preAttackTile;
     private BattleFieldController battleFieldController;
     //All Tilemaps needed;
     private Tilemap walkableTilemap, preAttackTilemap, backgroundTilemap, colliderTilemap, eventsTileMmap;
@@ -67,7 +67,7 @@ public class BattleFieldFactory : MonoBehaviour
         //Setup of BattleFieldController &UI
         GameObject battlefieldGameObject = new GameObject("BattleFieldReference");
         battleFieldController =  battlefieldGameObject.AddComponent<BattleFieldController>();
-        battleFieldController.SetupGrid(walkableTilemap, preAttackTilemap, walkableTile);
+        battleFieldController.SetupGrid(walkableTilemap, preAttackTilemap, preAttackTile);
     
         uIController.EnableUI();
     }
@@ -124,8 +124,6 @@ public class BattleFieldFactory : MonoBehaviour
         Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
         Vector3 offsetVector = new Vector3(0.5f,0.0f,0.0f);
         Vector3 destination = floorPosition + direction + offsetVector;
-        print("Direction: " + direction);
-        print("Destination: " + destination);
         yield return Mover.MovePath(player, destination, battleSetupMovementSpeed);
         playerAnimator.SetFloat("Horizontal", 0);
         playerAnimator.SetFloat("Vertical", 0);

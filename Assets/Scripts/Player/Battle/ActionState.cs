@@ -10,7 +10,7 @@ public class ActionState : BattleState {
         UserInterface.StateEnum = PlayerState.Action;
 
         // Remove Aiming UI
-        Player.BattleFieldController.RemovePreAttack();
+        Player.BattleFieldController.ClearPreAttack();
 
         yield return WaitForMenuInput();
         // TODO - stockpiling spell if typing is successful 
