@@ -55,23 +55,23 @@ public class BattleFieldController : MonoBehaviour {
         if (spell.spellName != "") {
             Vector3Int gridReferencePos = walkableTileMap.WorldToCell(reference.transform.position);
             foreach (Vector2 direction in spell.validDirections) {
-                for (int i = 0; i <= spell.maxDistance; i++) {
+                for (int i = 1; i <= spell.maxDistance; i++) {
                     preAttackTileMap.SetTile(new Vector3Int(gridReferencePos.x + (i * (int)direction.x), gridReferencePos.y + (i * (int)direction.y), 0), preAttackTile);
                 }
             }
         }
     }
 
-    public void RemovePreAttack() {
-        // TODO
+    public void ClearPreAttack() {
+        preAttackTileMap.ClearAllTiles();
     }
 
     // Update is called once per frame
     void Update() {
-        Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
-        Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
+        // Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);
+        // Vector3Int gridEnemyPos = walkableTileMap.WorldToCell(enemy.transform.position);
 
-        roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
-        new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
+        // roadPath = astar.CreatePath(spots, new Vector2Int(gridPlayerPos.x, gridPlayerPos.y),
+        // new Vector2Int(gridEnemyPos.x, gridEnemyPos.y), 1000);
     }
 }

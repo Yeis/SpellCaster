@@ -18,16 +18,21 @@ public class MoveState : BattleState {
     private IEnumerator MovePlayer() {
         Vector3 movementVector = new Vector3(0, 0, 0);
         if (Player.MovementInput.x < 0) {
-            movementVector = new Vector3(-1, 0, 0);
+            movementVector = Direction.Left;
         } else if (Player.MovementInput.x > 0) {
-            movementVector = new Vector3(1, 0, 0);
+            movementVector = Direction.Right;
         } else if (Player.MovementInput.y < 0) {
-            movementVector = new Vector3(0, -1);
+            movementVector = Direction.Down;
         } else if (Player.MovementInput.y > 0) {
-            movementVector = new Vector3(0, 1);
+            movementVector = Direction.Up;
         }
+        
+        //Animation
+        Player.Animator.SetFloat("Horizontal", movementVector.x);
+        Player.Animator.SetFloat("Vertical", movementVector.y);
 
-        Player.transform.position += movementVector;
+        Vector3 destination = Player.transform.position + movementVector;
+        Player.GetComponent<Rigidbody2D>().MovePosition(destination);
         yield return null;
     }
 

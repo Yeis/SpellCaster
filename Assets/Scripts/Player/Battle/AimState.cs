@@ -19,8 +19,11 @@ public class AimState : BattleState {
     private IEnumerator WaitForMenuInput() {
         while (Player.StateEnum == PlayerState.Aim) {
             if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
+                Player.BattleFieldController.ClearPreAttack();
                 Player.SetState(new StandbyState(Player));
             } else if (UserInterface.IsInTypingMode) {
+                Player.BattleFieldController.ClearPreAttack();
+
                 Player.SetState(new ActionState(Player));
             }
             yield return null;
