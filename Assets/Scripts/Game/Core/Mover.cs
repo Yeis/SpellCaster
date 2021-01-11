@@ -10,11 +10,12 @@ public class Mover   {
         Vector3 tempPosition = gameObject.transform.position;
 
         while (i <= 1.0f) {
-            i += Time.deltaTime * rate;
+            i += Time.fixedDeltaTime * rate;
             gameObject.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
             yield return null;
         }
     }
+
 
     //Careful if object collides with something before getting into the destination it will walk forever
     public static IEnumerator MovePath(GameObject gameObject, Vector3 destination, float speed) {
@@ -25,7 +26,7 @@ public class Mover   {
         while (gameObject.transform.position != destination) {
             i += Time.deltaTime * rate;
             gameObject.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 }
