@@ -12,8 +12,6 @@ public class MoveState : BattleState {
         UserInterface.StateEnum = PlayerState.Move;
 
         yield return MovePlayer();
-        Player.Animator.SetFloat("Horizontal", 0.0f);
-        Player.Animator.SetFloat("Vertical", 0.0f);
         Player.SetState(new CooldownState(Player));
     }
 
