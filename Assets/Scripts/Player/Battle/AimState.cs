@@ -22,8 +22,6 @@ public class AimState : BattleState {
                 Player.BattleFieldController.ClearPreAttack();
                 Player.SetState(new StandbyState(Player));
             } else if (UserInterface.IsInTypingMode) {
-                Player.BattleFieldController.ClearPreAttack();
-
                 Player.SetState(new ActionState(Player));
             }
             yield return null;
@@ -32,6 +30,7 @@ public class AimState : BattleState {
 
     public override void currentSpellChanged(object sender, PropertyChangedEventArgs e) {
         if (e.PropertyName == "CurrentSpell") {
+            Player.BattleFieldController.ClearPreAttack();
             Player.BattleFieldController.DrawPreAttack(Player.gameObject.transform.Find("PositionReference").gameObject, UserInterface.CurrentSpell);
         }
     }

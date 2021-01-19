@@ -10,11 +10,36 @@ public class Mover   {
         Vector3 tempPosition = gameObject.transform.position;
 
         while (i <= 1.0f) {
-            i += Time.fixedDeltaTime * rate;
+            i += Time.deltaTime * rate;
             gameObject.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
             yield return null;
         }
     }
+
+    //This function requires gameObject to have a RigidBody2D
+    public static IEnumerator MoveStepWithPhysics(GameObject gameObject, Vector3 destination, float speed) {
+        float i = 0.0f;
+        float rate = 1.0f / speed;
+        Rigidbody2D rg =  gameObject.GetComponent<Rigidbody2D>();
+        Vector3 tempPosition = gameObject.transform.position;
+
+        while (i <= 1.0f) {
+            i += Time.fixedDeltaTime * rate;
+            tempPosition = Vector3.Lerp(gameObject.transform.position, destination, i);
+            rg.MovePosition(tempPosition);
+            
+            //this is kind of hacky TBH
+            if(i >= 0.6f) {
+                Animator animator = gameObject.GetComponent<Animator>();
+                animator.SetFloat("Horizontal", 0.0f);
+                animator.SetFloat("Vertical", 0.0f);
+            }
+            yield return new WaitForEndOfFrame();
+
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
 
 
     //Careful if object collides with something before getting into the destination it will walk forever
@@ -26,7 +51,7 @@ public class Mover   {
         while (gameObject.transform.position != destination) {
             i += Time.deltaTime * rate;
             gameObject.transform.position = Vector2.MoveTowards(tempPosition, destination, i);
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 }
