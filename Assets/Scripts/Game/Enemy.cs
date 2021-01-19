@@ -12,6 +12,7 @@ public class Enemy : EnemyStateMachine {
     private Vector2 currDirection;
     private Animator animator;
     private GameObject playerReference;
+    private GameObject slider;
     private BattleFieldController battleFieldReference;
     public CombatController CombatController { get => combatController; set => combatController = value; }
     public Vector2 CurrDirection { get => currDirection; set => currDirection = value; }
@@ -22,12 +23,15 @@ public class Enemy : EnemyStateMachine {
     void Start() {
         movementCooldown = 2f;
 
-        PlayerReference = GameObject.FindGameObjectWithTag("Player");
+        PlayerReference = GameObject.FindGameObjectWithTag("Player").
+            transform.Find("PositionReference").gameObject;
         BattleFieldReference = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
-        ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
+        slider = gameObject.transform.Find("Slider").gameObject;
+        ActionSlider = slider.transform.Find("Action_Mask").gameObject;
         CombatController = GetComponent<CombatController>();
         Animator = GetComponent<Animator>();
         CurrDirection = Direction.Down;
         SetState(new WaitState(this));
     }
 }
+ 

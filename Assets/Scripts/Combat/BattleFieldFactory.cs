@@ -11,16 +11,20 @@ public class BattleFieldFactory : MonoBehaviour
     public TileBase preAttackTile;
     private BattleFieldController battleFieldController;
     //All Tilemaps needed;
-    private Tilemap walkableTilemap, preAttackTilemap, backgroundTilemap, colliderTilemap, eventsTileMmap;
+    private Tilemap walkableTilemap, preAttackTilemap, backgroundTilemap, colliderTilemap, eventsTilemap;
     private GameObject mainGrid;
     private bool isBattleFieldEnabled;
     private UIController uIController;
+    private static readonly Dictionary<string, BattleSettings> eventsToBattleSettings = new Dictionary<string, BattleSettings>
+    {
+        {"Events-1", new BattleSettings(2,1)}
+    };
 
     private void Start() {
         mainGrid = GameObject.Find("Grid");
         backgroundTilemap = mainGrid.transform.Find("Background_TileMap").gameObject.GetComponent<Tilemap>();
         colliderTilemap = mainGrid.transform.Find("Collider_Tilemap").gameObject.GetComponent<Tilemap>();
-        eventsTileMmap = gameObject.GetComponent<Tilemap>();
+        eventsTilemap = gameObject.GetComponent<Tilemap>();
 
         uIController = GameObject.Find("UI").GetComponent<UIController>();
     }
@@ -34,7 +38,6 @@ public class BattleFieldFactory : MonoBehaviour
   
         Vector3Int startingPosition = (position + direction);
         Stack<Vector3Int> stack = new Stack<Vector3Int>();
-        print(startingPosition);
         stack.Push(startingPosition);
 
         //DFS
@@ -66,6 +69,7 @@ public class BattleFieldFactory : MonoBehaviour
 
         //Setup of BattleFieldController &UI
         GameObject battlefieldGameObject = new GameObject("BattleFieldReference");
+        battlefieldGameObject.tag = "BattleField";
         battleFieldController =  battlefieldGameObject.AddComponent<BattleFieldController>();
         battleFieldController.SetupGrid(walkableTilemap, preAttackTilemap, preAttackTile);
     
@@ -93,7 +97,7 @@ public class BattleFieldFactory : MonoBehaviour
     }
 
     private bool canPlaceTileInPosition(Vector3Int position) {
-        return backgroundTilemap.HasTile(position) && !colliderTilemap.HasTile(position) && !walkableTilemap.HasTile(position) && !eventsTileMmap.HasTile(position);
+        return backgroundTilemap.HasTile(position) && !colliderTilemap.HasTile(position) && !walkableTilemap.HasTile(position) && !eventsTilemap.HasTile(position);
     }
 
 
@@ -101,7 +105,8 @@ public class BattleFieldFactory : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(!isBattleFieldEnabled) {
             //Close exit area
-            eventsTileMmap.GetComponent<TilemapCollider2D>().isTrigger = false;
+            TileBase tileBase = eventsTilemap.GetTile(Vector3Int.RoundToInt(other.transform.position));
+            eventsTilemap.GetComponent<TilemapCollider2D>().isTrigger = false;
             //Calculate collision direction
             Player player = other.gameObject.GetComponent<Player>();
             //Direction  comes in .1 intervals
@@ -110,6 +115,7 @@ public class BattleFieldFactory : MonoBehaviour
             player.InBattle = true;
             player.BattleFieldController = battleFieldController;
             StartCoroutine(InitializePlayerPositions(player.gameObject, colDirection));
+            EnableBattleFieldSpawningPoints();
         }
     }
 
@@ -131,5 +137,19 @@ public class BattleFieldFactory : MonoBehaviour
         //Standby
         player.GetComponent<Player>().SetState(new CooldownState(player.GetComponent<Player>()));
         yield return null;
+    }
+
+    private void EnableBattleFieldSpawningPoints() {
+        GameObject[] spawningPoints = GameObject.FindGameObjectsWithTag("Spawning Point");
+        foreach (GameObject spawningPoint in spawningPoints)
+        {
+            Vector3Int sPointPosition = walkableTilemap.WorldToCell(spawningPoint.transform.position);
+            print("Round: " + walkableTilemap.HasTile(sPointPosition));
+            if(walkableTilemap.HasTile(sPointPosition))
+            {
+                spawningPoint.GetComponent<Spawner>().isEnabled = true;
+            }
+
+        }
     }
 }

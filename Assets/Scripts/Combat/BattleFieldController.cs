@@ -66,6 +66,10 @@ public class BattleFieldController : MonoBehaviour {
         preAttackTileMap.ClearAllTiles();
     }
 
+    public bool IsEnemyInRange(GameObject player, List<GameObject> enemies, Spell spell)
+    {
+        return false;
+    }
     // Update is called once per frame
     void Update() {
         // Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);

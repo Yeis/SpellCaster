@@ -124,6 +124,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
                 print("Correct Letter");
                 UpdateSpellLabel(++currentSpellIndex);
 
+                //Terminamos de escribir la palabra
                 if (currentSpellIndex == currentSpell.spellName.Length) {
                     ResetHUD();
                 }

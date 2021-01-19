@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +12,7 @@ public class MoveState : BattleState {
         UserInterface.StateEnum = PlayerState.Move;
 
         yield return MovePlayer();
+  
         Player.SetState(new CooldownState(Player));
     }
 
@@ -30,9 +31,12 @@ public class MoveState : BattleState {
         //Animation
         Player.Animator.SetFloat("Horizontal", movementVector.x);
         Player.Animator.SetFloat("Vertical", movementVector.y);
-
+        //We need to move player with MovePosition to ensure its collides correctly with TileMaps
+        //The issues is that we have to manually move the slider.
         Vector3 destination = Player.transform.position + movementVector;
-        Player.GetComponent<Rigidbody2D>().MovePosition(destination);
+        yield return Mover.MoveStepWithPhysics(Player.gameObject, destination, 1.0f);
+        Player.Animator.SetFloat("Horizontal", 0.0f);
+        Player.Animator.SetFloat("Vertical", 0.0f);
         yield return null;
     }
 

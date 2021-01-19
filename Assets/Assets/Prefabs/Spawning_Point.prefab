@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3888797335611573435}
   m_Layer: 0
   m_Name: Spawning_Point
-  m_TagString: Untagged
+  m_TagString: Spawning Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 995869670247659522, guid: 43d917b981345bc40baa414595c17201, type: 3}
+  isEnabled: 0
+  numberOfEnemies: 2
+  spawnCooldown: 20
 --- !u!212 &3888797335611573435
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -83,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -41
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300184, guid: b90c9ee8b8ef38d43bcf937d0b9c4656, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

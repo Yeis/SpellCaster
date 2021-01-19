@@ -14,8 +14,9 @@ public static class Cooldown {
             Player.ActionSlider.transform.position = Vector2.MoveTowards(currentPos, destination, time);
             yield return null;
         }
+    }
 
+    public static void ResetPosition(Character Player, float offset) {
         Player.ActionSlider.transform.position = new Vector3(Player.ActionSlider.transform.position.x - offset, Player.ActionSlider.transform.position.y, Player.ActionSlider.transform.position.z);
-
     }
 }

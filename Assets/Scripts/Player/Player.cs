@@ -19,6 +19,7 @@ public class Player : BattleStateMachine {
     public Spell stockpile = null;
 
     public List<Spell> spellBook;
+    public GameObject Slider;
     private Scene currentScene;
     private BattleFieldController battleFieldController;
     public BattleFieldController BattleFieldController { get => battleFieldController; set => battleFieldController = value; }
@@ -45,7 +46,8 @@ public class Player : BattleStateMachine {
         spellBook = new List<Spell>();
         Spell fira = new Spell("fira", 10f, 2, 1.5f, SpellType.Fire, Vector2.zero,
             new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down });
-        Spell heal = new Spell("curita", -10f, 0, 3f, SpellType.Protection, Vector2.zero, new HashSet<Vector2>());
+        Spell heal = new Spell("curita", -10f, 3, 3f, SpellType.Protection, Vector2.zero, 
+            new HashSet<Vector2> { Direction.Left, Direction.Right});
 
         spellBook.Add(fira);
         spellBook.Add(heal);
@@ -53,8 +55,18 @@ public class Player : BattleStateMachine {
     }
 
     private void Start() {
-        ActionSlider = gameObject.transform.Find("Action_Mask").gameObject;
+        Slider = gameObject.transform.Find("Slider").gameObject;
+        ActionSlider = Slider.transform.Find("Action_Mask").gameObject;
         Animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if(InBattle && this.stockpile  != null 
+            && this.BattleFieldController.IsEnemyInRange(this.gameObject, new List<GameObject>(), this.stockpile))
+        {
+            SetState(new CastState(this));
+        }
     }
 
     void FixedUpdate() {
