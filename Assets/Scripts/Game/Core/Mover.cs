@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Mover   {
+public class Mover {
 
     public static IEnumerator MoveStep(GameObject gameObject, Vector3 destination, float speed) {
         float i = 0.0f;
@@ -20,20 +20,14 @@ public class Mover   {
     public static IEnumerator MoveStepWithPhysics(GameObject gameObject, Vector3 destination, float speed) {
         float i = 0.0f;
         float rate = 1.0f / speed;
-        Rigidbody2D rg =  gameObject.GetComponent<Rigidbody2D>();
+        Rigidbody2D rg = gameObject.GetComponent<Rigidbody2D>();
         Vector3 tempPosition = gameObject.transform.position;
 
         while (i <= 1.0f) {
             i += Time.fixedDeltaTime * rate;
             tempPosition = Vector3.Lerp(gameObject.transform.position, destination, i);
             rg.MovePosition(tempPosition);
-            
-            //this is kind of hacky TBH
-            if(i >= 0.6f) {
-                Animator animator = gameObject.GetComponent<Animator>();
-                animator.SetFloat("Horizontal", 0.0f);
-                animator.SetFloat("Vertical", 0.0f);
-            }
+
             yield return new WaitForEndOfFrame();
 
         }
