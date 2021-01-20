@@ -46,8 +46,8 @@ public class Player : BattleStateMachine {
         spellBook = new List<Spell>();
         Spell fira = new Spell("fira", 10f, 2, 1.5f, SpellType.Fire, Vector2.zero,
             new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down });
-        Spell heal = new Spell("curita", -10f, 3, 3f, SpellType.Protection, Vector2.zero, 
-            new HashSet<Vector2> { Direction.Left, Direction.Right});
+        Spell heal = new Spell("curita", -10f, 3, 3f, SpellType.Protection, Vector2.zero,
+            new HashSet<Vector2> { Direction.Left, Direction.Right });
 
         spellBook.Add(fira);
         spellBook.Add(heal);
@@ -60,11 +60,9 @@ public class Player : BattleStateMachine {
         Animator = GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        if(InBattle && this.stockpile  != null 
-            && this.BattleFieldController.IsEnemyInRange(this.gameObject, new List<GameObject>(), this.stockpile))
-        {
+    private void Update() {
+        if (InBattle && this.stockpile != null
+            && this.BattleFieldController.IsEnemyInRange(this.gameObject, new List<GameObject>(), this.stockpile)) {
             SetState(new CastState(this));
         }
     }
@@ -84,8 +82,15 @@ public class Player : BattleStateMachine {
 
     // Should be deprecated by state machine
     private Vector3 GetMovementDirection() {
-        Animator.SetFloat("Horizontal", movementInput.x);
-        Animator.SetFloat("Vertical", movementInput.y);
+        // Check for "empty" inputs so that mage doesn't end up always looking at the same direction
+        // This allows for the player to remain in the direction from the last input
+        if (!(movementInput.x == 0 && movementInput.y == 0)) {
+            Animator.SetBool("Moving", true);
+            Animator.SetFloat("Horizontal", movementInput.x);
+            Animator.SetFloat("Vertical", movementInput.y);
+        } else {
+            Animator.SetBool("Moving", false);
+        }
 
         Vector3 movement = new Vector3(movementInput.x, movementInput.y, 0.0f);
         return (movement * speed) * Time.deltaTime;
