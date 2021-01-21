@@ -9,23 +9,7 @@ public class AimState : BattleState {
     public override IEnumerator Start() {
 
         Player.StateEnum = PlayerState.Aim;
-        UserInterface.StateEnum = PlayerState.Aim;
-        yield return WaitForMenuInput();
-
-        // Player has made a choice, erase spell range
         yield return null;
-    }
-
-    private IEnumerator WaitForMenuInput() {
-        while (Player.StateEnum == PlayerState.Aim) {
-            if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
-                Player.BattleFieldController.ClearPreAttack();
-                Player.SetState(new StandbyState(Player));
-            } else if (UserInterface.IsInTypingMode) {
-                Player.SetState(new ActionState(Player));
-            }
-            yield return null;
-        }
     }
 
     public override void currentSpellChanged(object sender, PropertyChangedEventArgs e) {

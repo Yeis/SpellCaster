@@ -8,8 +8,6 @@ public class CooldownState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Cooldown;
-        UserInterface.StateEnum = PlayerState.Cooldown;
-
         yield return Cooldown.RestoreEnergy(Player, 1.5f);
 
         Player.SetState(new StandbyState(Player));
