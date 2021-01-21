@@ -22,11 +22,13 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     private float initialYSelectorPosition, inputDelay;
     private Animator animator;
     private bool isEnabled;
+    private bool pendingPunishment;
 
     private PlayerState state = PlayerState.Unknown;
     public PlayerState StateEnum { get => state; set => state = value; }
     public bool IsInAttackMenu { get => isInAttackMenu; }
     public bool IsInTypingMode { get => isInTypingMode; }
+    public bool PendingPunishment { get => pendingPunishment; set => pendingPunishment = value; }
 
     public Spell CurrentSpell {
         get => currentSpell;
@@ -128,6 +130,10 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
                 if (currentSpellIndex == currentSpell.spellName.Length) {
                     ResetHUD();
                 }
+            } else {
+                // send to cooldown
+                ResetHUD();
+                pendingPunishment = true;
             }
         }
     }
@@ -184,7 +190,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         }
     }
 
-    public void EnableUI(){
+    public void EnableUI() {
         animator.SetTrigger("EnableUI");
         isEnabled = true;
     }

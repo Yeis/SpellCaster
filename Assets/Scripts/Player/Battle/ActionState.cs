@@ -17,10 +17,17 @@ public class ActionState : BattleState {
     private IEnumerator WaitForMenuInput() {
         while (Player.StateEnum == PlayerState.Action) {
             if (!UserInterface.IsInAttackMenu && !UserInterface.IsInTypingMode) {
-                // animacion de algo? si no esta este wait, y el spell termina en W, A, S, o D, 
-                // el maguito inmediatamente se mueve
-                yield return new WaitForSeconds(0.5f);
-                Player.SetState(new StandbyState(Player));
+                //checa si debemos castigar al maguito
+                if (UserInterface.PendingPunishment) {
+                    Cooldown.SpendEnergy(Player, 1.5f);
+                    Player.SetState(new CooldownState(Player));
+                    UserInterface.PendingPunishment = false;
+                } else {
+                    // animacion de algo? si no esta este wait, y el spell termina en W, A, S, o D, 
+                    // el maguito inmediatamente se mueve
+                    yield return new WaitForSeconds(0.5f);
+                    Player.SetState(new StandbyState(Player));
+                }
             }
             yield return null;
         }

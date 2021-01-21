@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Cooldown {
 
-    public static IEnumerator CountDown(Character Player, float offset) {
+    public static IEnumerator RestoreEnergy(Character Player, float offset) {
         float i = 0.0f;
         Vector3 destination = new Vector3(Player.ActionSlider.transform.position.x + offset, Player.ActionSlider.transform.position.y, Player.ActionSlider.transform.position.z);
         while (i < Player.movementCooldown) {
@@ -16,7 +16,7 @@ public static class Cooldown {
         }
     }
 
-    public static void ResetPosition(Character Player, float offset) {
+    public static void SpendEnergy(Character Player, float offset) {
         Player.ActionSlider.transform.position = new Vector3(Player.ActionSlider.transform.position.x - offset, Player.ActionSlider.transform.position.y, Player.ActionSlider.transform.position.z);
     }
 }

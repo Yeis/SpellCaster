@@ -10,7 +10,7 @@ public class AttackState : EnemyState {
         Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirection.y);
         Enemy.CombatController.Attack(Enemy.spells[0], Enemy.CurrDirection);
         yield return new WaitForSeconds(2f);
-        Cooldown.ResetPosition(Enemy, .98f);
+        Cooldown.SpendEnergy(Enemy, .98f);
 
         Enemy.SetState(new WaitState(Enemy));
     }

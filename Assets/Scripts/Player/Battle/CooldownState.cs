@@ -10,7 +10,7 @@ public class CooldownState : BattleState {
         Player.StateEnum = PlayerState.Cooldown;
         UserInterface.StateEnum = PlayerState.Cooldown;
 
-        yield return Cooldown.CountDown(Player, 1.5f);
+        yield return Cooldown.RestoreEnergy(Player, 1.5f);
 
         Player.SetState(new StandbyState(Player));
     }

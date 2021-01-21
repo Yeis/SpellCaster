@@ -22,7 +22,7 @@ public class StandbyState : BattleState {
         while (Player.StateEnum == PlayerState.Standby && !hasMoved) {
             if (Player.MovementInput.x != 0 || Player.MovementInput.y != 0) {
                 hasMoved = true;
-                Cooldown.ResetPosition(Player,1.5f);
+                Cooldown.SpendEnergy(Player, 1.5f);
                 Player.SetState(new MoveState(Player));
             }
 

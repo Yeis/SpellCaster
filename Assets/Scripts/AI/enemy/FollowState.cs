@@ -43,7 +43,7 @@ public class FollowState : EnemyState {
         Enemy.Animator.SetBool("Moving", true);
         yield return Mover.MoveStep(Enemy.gameObject, destination, Enemy.speed);
         Enemy.Animator.SetBool("Moving", false);
-        Cooldown.ResetPosition(Enemy, .98f);
+        Cooldown.SpendEnergy(Enemy, .98f);
         Enemy.SetState(new WaitState(Enemy));
         #endregion
     }
