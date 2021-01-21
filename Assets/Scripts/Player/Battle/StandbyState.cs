@@ -8,15 +8,13 @@ public class StandbyState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Standby;
-        UserInterface.StateEnum = PlayerState.Standby;
-
         // Remove Aiming UI in case we're coming back from the Aim state
         Player.BattleFieldController.ClearPreAttack();
 
-        yield return WaitForMenuInpuOrMovement();
+        yield return WaitForMovement();
     }
 
-    private IEnumerator WaitForMenuInpuOrMovement() {
+    private IEnumerator WaitForMovement() {
         bool hasMoved = false;
 
         while (Player.StateEnum == PlayerState.Standby && !hasMoved) {
@@ -24,11 +22,6 @@ public class StandbyState : BattleState {
                 hasMoved = true;
                 Cooldown.SpendEnergy(Player, 1.5f);
                 Player.SetState(new MoveState(Player));
-            }
-
-            // Menu input
-            if (UserInterface.IsInAttackMenu) {
-                Player.SetState(new AimState(Player));
             }
             yield return null;
         }

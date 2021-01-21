@@ -9,8 +9,6 @@ public class MoveState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Move;
-        UserInterface.StateEnum = PlayerState.Move;
-
         yield return MovePlayer();
 
         Player.SetState(new CooldownState(Player));

@@ -100,6 +100,11 @@ public class Player : BattleStateMachine {
         movementInput = value.Get<Vector2>();
     }
 
+    public void OnActionEnd() {
+        Animator.ResetTrigger("Cast");
+        SetState(new StandbyState(this));
+    }
+
     #region Debug GUI
     public GUISkin customGUISkin;
 

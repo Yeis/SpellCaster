@@ -22,13 +22,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     private float initialYSelectorPosition, inputDelay;
     private Animator animator;
     private bool isEnabled;
-    private bool pendingPunishment;
-
-    private PlayerState state = PlayerState.Unknown;
-    public PlayerState StateEnum { get => state; set => state = value; }
-    public bool IsInAttackMenu { get => isInAttackMenu; }
-    public bool IsInTypingMode { get => isInTypingMode; }
-    public bool PendingPunishment { get => pendingPunishment; set => pendingPunishment = value; }
+    private Player player;
 
     public Spell CurrentSpell {
         get => currentSpell;
@@ -52,7 +46,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         animator = GetComponent<Animator>();
 
         //Get all UI References
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();
         mainOptionsPanel = GameObject.Find("Main_Options_Panel");
         spellOptionsPanel = GameObject.Find("Spell_Options_Panel");
@@ -107,8 +101,9 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
             newYPosition = commandLabels[currentMenuIndex].rectTransform.position.y;
             selector.rectTransform.position = new Vector3(selector.rectTransform.position.x, newYPosition, selector.rectTransform.position.z);
         }
-        switch (state) {
+        switch (player.StateEnum) {
             case PlayerState.Cooldown:
+            case PlayerState.Action:
                 isEnabled = false;
                 break;
             case PlayerState.Standby:
@@ -129,11 +124,14 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
                 //Terminamos de escribir la palabra
                 if (currentSpellIndex == currentSpell.spellName.Length) {
                     ResetHUD();
+                    player.stockpile = currentSpell;
+                    player.Animator.SetTrigger("Cast");
                 }
             } else {
                 // send to cooldown
                 ResetHUD();
-                pendingPunishment = true;
+                Cooldown.SpendEnergy(player, 1.5f);
+                player.SetState(new CooldownState(player));
             }
         }
     }
@@ -207,10 +205,14 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
             ToggleAttackSubMenu(false);
             spellLabel.text = currentSpell.spellName;
             currentSpellIndex = 0;
+
+            player.SetState(new ActionState(player));
         } else if (!isInTypingMode) {
             ToggleAttackSubMenu(true);
             currentMenuIndex = 0;
             CurrentSpell = spellList[currentMenuIndex];
+
+            player.SetState(new AimState(player));
         }
     }
 
@@ -218,6 +220,8 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         if (isInAttackMenu) {
             ToggleAttackSubMenu(false);
             currentMenuIndex = 0;
+
+            player.SetState(new StandbyState(player));
         }
     }
 
