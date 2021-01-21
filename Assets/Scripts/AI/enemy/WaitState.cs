@@ -12,7 +12,7 @@ public class WaitState : EnemyState {
         Enemy.print("WaitState");
         Enemy.Animator.SetFloat("Horizontal", Enemy.CurrDirection.x);
         Enemy.Animator.SetFloat("Vertical", Enemy.CurrDirection.y);
-        yield return Cooldown.CountDown(Enemy, .98f);
+        yield return Cooldown.RestoreEnergy(Enemy, .98f);
 
         if (InAttackRange()) {
             Enemy.SetState(new AttackState(Enemy));
