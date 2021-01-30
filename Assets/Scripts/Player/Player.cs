@@ -15,7 +15,8 @@ public enum PlayerState {
 
 public class Player : BattleStateMachine {
     public string characterName = "MrYeis";
-    public float health = 50, speed = 5f;
+    public int health = 50;
+    public float speed = 5f;
     public Spell stockpile = null;
 
     public List<Spell> spellBook;
@@ -27,6 +28,7 @@ public class Player : BattleStateMachine {
     public Animator Animator { get => animator; set => animator = value; }
     private PlayerState state = PlayerState.Unknown;
     public PlayerState StateEnum { get => state; set => state = value; }
+    private UIController uIController;
 
     /// Movement 
     private Vector2 movementInput;
@@ -41,12 +43,14 @@ public class Player : BattleStateMachine {
         if (GameObject.FindGameObjectsWithTag("BattleField").Length > 0) {
             BattleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         }
+        uIController = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UIController>();
+
         currentScene = SceneManager.GetActiveScene();
 
         spellBook = new List<Spell>();
-        Spell fira = new Spell("fira", 10f, 2, 1.5f, SpellType.Fire, Vector2.zero,
+        Spell fira = new Spell("fira", 10, 2, 1.5f, SpellType.Fire, Vector2.zero,
             new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down });
-        Spell heal = new Spell("curita", -10f, 3, 3f, SpellType.Protection, Vector2.zero,
+        Spell heal = new Spell("curita", -10, 3, 3f, SpellType.Protection, Vector2.zero,
             new HashSet<Vector2> { Direction.Left, Direction.Right });
 
         spellBook.Add(fira);
@@ -58,6 +62,10 @@ public class Player : BattleStateMachine {
         Slider = gameObject.transform.Find("Slider").gameObject;
         ActionSlider = Slider.transform.Find("Action_Mask").gameObject;
         Animator = GetComponent<Animator>();
+        //Setup Health bar
+        uIController.HPSlider.maxValue = this.health;
+        uIController.HPSlider.value = this.health;
+        uIController.HPSlider.minValue = 0;
     }
 
     private void Update() {
@@ -75,6 +83,34 @@ public class Player : BattleStateMachine {
         }
     }
 
+    public string GetCurrentAnimationStateName() {
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        return clipInfo[0].clip.name;
+    }
+
+    public Vector3 GetDirectionFromAnimationState() {
+        string currentClip = GetCurrentAnimationStateName();
+        switch (currentClip) {
+            case "walking-front":
+                return Vector3.down;
+            case "walking_back":
+                return Vector3.up;
+            case "walking_left":
+                return Vector3.left;
+            case "walking_right":
+                return Vector3.right;
+            default:
+                return Vector3.zero;
+        }
+    }
+
+    public void TakeDamage(int damage) {
+        this.health = Mathf.Max(0, this.health - damage);
+        uIController.UpdateHealth(this.health, true);
+        if(health == 0) {
+            print("He muerto");
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         transform.position -= direction;

@@ -32,7 +32,6 @@ public class Bee : BeeStateMachine {
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        print("Coolision Enter");
         SetState(new BounceState(this));
     }
 }

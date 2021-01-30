@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
+    public BattleFieldController battleFieldControllerReference;
     // Start is called before the first frame update
     public bool isEnabled = false;
     public int numberOfEnemies;
@@ -13,8 +14,10 @@ public class Spawner : MonoBehaviour
     private float timeSinceLastSpawn;
 
  
-    public void Spawn(){
-        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+    public void Spawn() {
+        GameObject instance = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        battleFieldControllerReference.currentEnemies.Add(instance);
+        instance.gameObject.name = instance.gameObject.name + "_" + battleFieldControllerReference.currentEnemies.Count.ToString();
         numberSpawned++;
         timeSinceLastSpawn = 0.0f;
     }
@@ -30,7 +33,6 @@ public class Spawner : MonoBehaviour
             if (numberSpawned < numberOfEnemies) {
                 timeSinceLastSpawn += Time.deltaTime;
                 if (timeSinceLastSpawn >= spawnCooldown) {
-                    print("Spawning");
                     Spawn();
                 }
             } else {

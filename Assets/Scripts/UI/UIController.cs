@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     private float initialYSelectorPosition, inputDelay;
     private Animator animator;
     private bool isEnabled;
+    public Slider HPSlider;
 
     private PlayerState state = PlayerState.Unknown;
     public PlayerState StateEnum { get => state; set => state = value; }
@@ -44,20 +45,27 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         Keyboard.current.onTextInput -= HandleTypingInput;
     }
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake()
+    {
         //Trigger Animation
         animator = GetComponent<Animator>();
-
-        //Get all UI References
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        commandLabels = new List<Text>();
         mainOptionsPanel = GameObject.Find("Main_Options_Panel");
         spellOptionsPanel = GameObject.Find("Spell_Options_Panel");
         selector = GameObject.Find("Selector").GetComponent<Image>();
         attackSelector = GameObject.Find("Attack_Selector").GetComponent<Image>();
         attackLabel = GameObject.Find("Attack_Label").GetComponent<Text>();
         spellLabel = GameObject.Find("Spell_Label").GetComponent<Text>();
+        HPSlider = GameObject.Find("HP_Slider").GetComponent<Slider>();
+    }
+
+    // Start is called before the first frame update
+    void Start() {
+
+
+        //Get all UI References
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        commandLabels = new List<Text>();
+ 
         ToggleAttackSubMenu(false);
         initialYSelectorPosition = selector.rectTransform.localPosition.y;
 
@@ -132,6 +140,24 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         }
     }
 
+    private IEnumerator DampenHealthBar(int value) {
+        for (int i = 0; i < value; i++)
+        {
+            this.HPSlider.value += 1;
+            yield return null;
+            this.HPSlider.value -= 1;
+            yield return null;
+        }
+        yield return null;
+    }
+
+    public void UpdateHealth(int value, bool dampening) {
+        this.HPSlider.value = value;
+        if(dampening) {
+            StartCoroutine(DampenHealthBar(value));
+        }
+    }
+
 
     private void ResetHUD() {
         print("ResetHUD");
@@ -156,10 +182,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     }
 
     public void OnNavigate(InputValue value) {
-        print("Aqui andamos 1");
-
         if (isEnabled) {
-            print("Aqui andamos 2");
             var nav = value.Get<Vector2>();
             if (nav.x > 0) { // forward
                 MenuForward();

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyState {
-    protected Enemy Enemy;
+namespace AI {
+    public abstract class EnemyState {
+        protected Enemy Enemy;
 
-    public EnemyState(Enemy enemy) {
-        Enemy = enemy;
-    }
+        public EnemyState(Enemy enemy) {
+            Enemy = enemy;
+        }
 
-    public virtual IEnumerator Start() {
-        yield break;
+        public virtual IEnumerator Start() {
+            yield break;
+        }
     }
 }
+
