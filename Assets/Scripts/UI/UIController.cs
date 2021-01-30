@@ -23,6 +23,11 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     private Animator animator;
     private bool isEnabled;
     private Player player;
+    public Slider HPSlider;
+    private PlayerState state = PlayerState.Unknown;
+    public PlayerState StateEnum { get => state; set => state = value; }
+    public bool IsInAttackMenu { get => isInAttackMenu; }
+    public bool IsInTypingMode { get => isInTypingMode; }
 
     public Spell CurrentSpell {
         get => currentSpell;
@@ -40,11 +45,10 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         Keyboard.current.onTextInput -= HandleTypingInput;
     }
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake()
+    {
         //Trigger Animation
         animator = GetComponent<Animator>();
-
         //Get all UI References
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();
@@ -54,6 +58,17 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         attackSelector = GameObject.Find("Attack_Selector").GetComponent<Image>();
         attackLabel = GameObject.Find("Attack_Label").GetComponent<Text>();
         spellLabel = GameObject.Find("Spell_Label").GetComponent<Text>();
+        HPSlider = GameObject.Find("HP_Slider").GetComponent<Slider>();
+    }
+
+    // Start is called before the first frame update
+    void Start() {
+
+
+        //Get all UI References
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        commandLabels = new List<Text>();
+ 
         ToggleAttackSubMenu(false);
         initialYSelectorPosition = selector.rectTransform.localPosition.y;
 
@@ -130,9 +145,27 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
             } else {
                 // send to cooldown
                 ResetHUD();
-                Cooldown.SpendEnergy(player, 1.5f);
+                Cooldown.ResetPosition(player, 0.49f, 0.1789f);
                 player.SetState(new CooldownState(player));
             }
+        }
+    }
+
+    private IEnumerator DampenHealthBar(int value) {
+        for (int i = 0; i < value; i++)
+        {
+            this.HPSlider.value += 1;
+            yield return null;
+            this.HPSlider.value -= 1;
+            yield return null;
+        }
+        yield return null;
+    }
+
+    public void UpdateHealth(int value, bool dampening) {
+        this.HPSlider.value = value;
+        if(dampening) {
+            StartCoroutine(DampenHealthBar(value));
         }
     }
 
@@ -160,10 +193,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     }
 
     public void OnNavigate(InputValue value) {
-        print("Aqui andamos 1");
-
         if (isEnabled) {
-            print("Aqui andamos 2");
             var nav = value.Get<Vector2>();
             if (nav.x > 0) { // forward
                 MenuForward();

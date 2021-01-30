@@ -60,7 +60,37 @@ public class Astar {
             ClosedSet.Add(current);
 
             //Finds the next closest step on the grid
-            var neighboors = current.Neighboors;
+            List<Spot> neighboors = current.Neighboors;
+            // while(neighboors.Count > 0) {
+            //     int random = Random.Range(0, neighboors.Count - 1);
+            //     Spot neighboor = neighboors[random];
+            //     if (!ClosedSet.Contains(neighboor) && neighboor.Height < 1) {
+            //         var tempG = current.G + 1; // gets a temp comparison integer for seeing if a route is shorter than our current path
+            //         bool newPath = false;
+
+            //         if (OpenSet.Contains(neighboor)) //Checks if the neighboor we are checking is within the openset
+            //         {
+            //             if (tempG < neighboor.G)//The distance to the end goal from this neighboor is shorter so we need a new path
+            //             {
+            //                 neighboor.G = tempG;
+            //                 newPath = true;
+            //             }
+            //         } else//if its not in openSet or closed set, then it IS a new path and we should add it too openset
+            //           {
+            //             neighboor.G = tempG;
+            //             newPath = true;
+            //             OpenSet.Add(neighboor);
+            //         }
+
+            //         if (newPath) {
+            //             neighboor.H = Heuristic(neighboor, End);
+            //             neighboor.F = neighboor.G + neighboor.H;
+            //             neighboor.previous = current;
+            //         }
+            //     }
+            //     neighboors.Remove(neighboor);
+            // }
+
             for (int i = 0; i < neighboors.Count; i++) {
                 var neighboor = neighboors[i];
                 if (!ClosedSet.Contains(neighboor) && neighboor.Height < 1) {
@@ -95,7 +125,7 @@ public class Astar {
     }
 
     private int Heuristic(Spot a, Spot b) {
-        //manhattan
+        //manhattan distance
         var dx = Mathf.Abs(a.X - b.X);
         var dy = Mathf.Abs(a.Y - b.Y);
         return 1 * (dx + dy);

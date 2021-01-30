@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using AI;
 
 public class SpellMovement : MonoBehaviour {
     public float speed = 3f;
@@ -59,6 +60,7 @@ public class SpellMovement : MonoBehaviour {
     // }
 
     public void OnHit() {
+        print("Aqui");
         Destroy(gameObject);
     }
 
@@ -84,6 +86,7 @@ public class SpellMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D col) {
+        print("Vamos por aqui");
         if (col.gameObject.tag == "Proyectile") {
             Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
         }

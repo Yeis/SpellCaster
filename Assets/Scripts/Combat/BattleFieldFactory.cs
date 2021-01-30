@@ -109,7 +109,7 @@ public class BattleFieldFactory : MonoBehaviour {
             //Calculate collision direction
             Player player = other.gameObject.GetComponent<Player>();
             //Direction  comes in .1 intervals
-            Vector3Int colDirection = Vector3Int.RoundToInt(player.direction * 20);
+            Vector3Int colDirection = Vector3Int.RoundToInt(player.GetDirectionFromAnimationState() * 2);
             InitializeBattleField(Vector3Int.FloorToInt(other.transform.position), colDirection);
             player.InBattle = true;
             player.BattleFieldController = battleFieldController;
@@ -125,8 +125,9 @@ public class BattleFieldFactory : MonoBehaviour {
         Animator playerAnimator = player.GetComponent<Player>().Animator;
         playerAnimator.SetFloat("Horizontal", direction.x);
         playerAnimator.SetFloat("Vertical", direction.y);
+        //reset x component to avoid diagonal walking bug
         float battleSetupMovementSpeed = 1.0f;
-        Vector3Int floorPosition = Vector3Int.FloorToInt(player.transform.position);
+        Vector3Int floorPosition = Vector3Int.RoundToInt(player.transform.position);
         Vector3 offsetVector = new Vector3(0.5f, 0.0f, 0.0f);
         Vector3 destination = floorPosition + direction + offsetVector;
         yield return Mover.MovePath(player, destination, battleSetupMovementSpeed);
@@ -135,8 +136,9 @@ public class BattleFieldFactory : MonoBehaviour {
         playerAnimator.SetFloat("Horizontal", 0);
         playerAnimator.SetFloat("Vertical", 0);
 
-        //Standby
-        player.GetComponent<Player>().SetState(new CooldownState(player.GetComponent<Player>()));
+        Player playerScript = player.GetComponent<Player>();
+        Cooldown.ResetPosition(playerScript, 0.49f, 0.1789f);
+        playerScript.SetState(new CooldownState(playerScript));
         yield return null;
     }
 
@@ -146,7 +148,9 @@ public class BattleFieldFactory : MonoBehaviour {
             Vector3Int sPointPosition = walkableTilemap.WorldToCell(spawningPoint.transform.position);
             print("Round: " + walkableTilemap.HasTile(sPointPosition));
             if (walkableTilemap.HasTile(sPointPosition)) {
-                spawningPoint.GetComponent<Spawner>().isEnabled = true;
+                Spawner spawner = spawningPoint.GetComponent<Spawner>();
+                spawner.isEnabled = true;
+                spawner.battleFieldControllerReference = this.battleFieldController;
             }
 
         }

@@ -16,6 +16,7 @@ public class BattleFieldController : MonoBehaviour {
     public Astar astar;
     List<Spot> roadPath = new List<Spot>();
     public Vector2Int start;
+    public List<GameObject> currentEnemies;
 
     public void SetupGrid(Tilemap walkableTileMap, Tilemap roadTileMap, TileBase preAttackTile) {
         this.walkableTileMap = walkableTileMap;
@@ -25,6 +26,7 @@ public class BattleFieldController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        currentEnemies = new List<GameObject>();
         walkableTileMap.CompressBounds();
         preAttackTileMap.CompressBounds();
         bounds = walkableTileMap.cellBounds;

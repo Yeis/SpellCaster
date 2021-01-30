@@ -20,11 +20,10 @@ public class StandbyState : BattleState {
         while (Player.StateEnum == PlayerState.Standby && !hasMoved) {
             if (Player.MovementInput.x != 0 || Player.MovementInput.y != 0) {
                 hasMoved = true;
-                Cooldown.SpendEnergy(Player, 1.5f);
+                Cooldown.ResetPosition(Player, 0.49f, 0.1789f);
                 Player.SetState(new MoveState(Player));
             }
             yield return null;
         }
     }
-
 }

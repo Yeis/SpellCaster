@@ -34,8 +34,6 @@ public class Mover {
         yield return new WaitForEndOfFrame();
     }
 
-
-
     //Careful if object collides with something before getting into the destination it will walk forever
     public static IEnumerator MovePath(GameObject gameObject, Vector3 destination, float speed) {
         float i = 0.0f;
