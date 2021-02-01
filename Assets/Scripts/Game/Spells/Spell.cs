@@ -33,9 +33,9 @@ public class Spell : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        if(col.tag == "Player") {
+        if (col.tag == "Player") {
             col.gameObject.GetComponent<Player>().TakeDamage(this.damage);
-        } else if(col.tag == "Enemy") {
+        } else if (col.tag == "Enemy") {
             col.gameObject.GetComponent<Enemy>().TakeDamage(this.damage);
         }
         //Destroy projectile

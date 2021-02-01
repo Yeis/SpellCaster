@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AI {
     public class Enemy : EnemyStateMachine {
         //Public Fields
-        public float health = 30f, speed = 3f;
+        public float health = 5f, speed = 3f;
         public List<GameObject> spells;
         public Vector3 destination;
         //Private Fields
@@ -38,11 +38,11 @@ namespace AI {
         public void TakeDamage(int damage) {
             this.health = Mathf.Max(0, this.health - damage);
             if (health == 0) {
-                print("He muerto");
+                print("He muerto - enemigo");
+                Destroy(this.gameObject);
             }
         }
     }
 }
 
 
- 

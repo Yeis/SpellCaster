@@ -159,7 +159,7 @@ MonoBehaviour:
   damage: 5
   maxDistance: 4
   castingTime: 2
-  type: 1
+  type: 2
   direction: {x: -1, y: 0}
 --- !u!61 &382009340110533476
 BoxCollider2D:
