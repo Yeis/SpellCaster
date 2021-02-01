@@ -1,11 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class BattleFieldController : MonoBehaviour {
 
-    GameObject player, enemy;
+    Player player;
+    GameObject enemy;
     public Tilemap walkableTileMap;
     public Tilemap preAttackTileMap;
 
@@ -30,7 +31,7 @@ public class BattleFieldController : MonoBehaviour {
         walkableTileMap.CompressBounds();
         preAttackTileMap.CompressBounds();
         bounds = walkableTileMap.cellBounds;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         enemy = GameObject.FindGameObjectWithTag("Enemy");
 
         CreateGrid();
@@ -68,10 +69,32 @@ public class BattleFieldController : MonoBehaviour {
         preAttackTileMap.ClearAllTiles();
     }
 
-    public bool IsEnemyInRange(GameObject player, List<GameObject> enemies, Spell spell)
-    {
+    public bool IsEnemyInRange(GameObject gObject, List<GameObject> enemies, Spell spell) {
+        foreach (var direction in spell.validDirections) {
+            Vector3 positionReference = player.transform.Find("PositionReference").transform.position;
+
+            if (direction == Direction.Left) {
+                positionReference += new Vector3(-0.5f, 0.5f, 0);
+            } else if (direction == Direction.Right) {
+                positionReference += new Vector3(0.5f, 0.5f, 0);
+            } else if (direction == Direction.Up) {
+                positionReference += new Vector3(0, 1, 0);
+            }
+            Debug.DrawRay(positionReference, direction * spell.maxDistance, Color.yellow);
+
+            RaycastHit2D hit = Physics2D.Raycast(positionReference, direction, spell.maxDistance);
+
+            if (hit.collider != null) {
+                if (hit.collider.CompareTag("Enemy")) {
+                    player.direction = direction;
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
+
     // Update is called once per frame
     void Update() {
         // Vector3Int gridPlayerPos = walkableTileMap.WorldToCell(player.transform.position);

@@ -20,6 +20,8 @@ public class Player : BattleStateMachine {
     public Spell stockpile = null;
 
     public List<Spell> spellBook;
+    public List<GameObject> spells;
+
     public GameObject Slider;
     private Scene currentScene;
     private BattleFieldController battleFieldController;
@@ -29,6 +31,8 @@ public class Player : BattleStateMachine {
     private PlayerState state = PlayerState.Unknown;
     public PlayerState StateEnum { get => state; set => state = value; }
     private UIController uIController;
+    private CombatController combatController;
+    public CombatController CombatController { get => combatController; set => combatController = value; }
 
     /// Movement 
     private Vector2 movementInput;
@@ -44,9 +48,11 @@ public class Player : BattleStateMachine {
             BattleFieldController = GameObject.FindGameObjectWithTag("BattleField").GetComponent<BattleFieldController>();
         }
         uIController = GameObject.FindGameObjectWithTag("UserInterface").GetComponent<UIController>();
+        CombatController = GetComponent<CombatController>();
 
         currentScene = SceneManager.GetActiveScene();
 
+        stockpile = new Spell();
         spellBook = new List<Spell>();
         Spell fira = new Spell("fira", 10, 2, 1.5f, SpellType.Fire, Vector2.zero,
             new HashSet<Vector2> { Direction.Left, Direction.Right, Direction.Up, Direction.Down });
@@ -68,18 +74,20 @@ public class Player : BattleStateMachine {
         uIController.HPSlider.minValue = 0;
     }
 
-    private void Update() {
-        if (InBattle && this.stockpile != null
-            && this.BattleFieldController.IsEnemyInRange(this.gameObject, new List<GameObject>(), this.stockpile)) {
-            SetState(new CastState(this));
-        }
-    }
+    private void Update() { }
 
     void FixedUpdate() {
-        /// Movement - Should be deprecated by state machine
         if (!InBattle) {
             direction = GetMovementDirection();
             transform.position += direction;
+        }
+
+        if (InBattle &&
+            this.stockpile.spellName != "" &&
+            this.BattleFieldController.IsEnemyInRange(this.gameObject, new List<GameObject>(), this.stockpile) &&
+            (state != PlayerState.Move || state != PlayerState.Cooldown)
+        ) {
+            SetState(new CastState(this));
         }
     }
 
@@ -107,7 +115,7 @@ public class Player : BattleStateMachine {
     public void TakeDamage(int damage) {
         this.health = Mathf.Max(0, this.health - damage);
         uIController.UpdateHealth(this.health, true);
-        if(health == 0) {
+        if (health == 0) {
             print("He muerto");
         }
     }
@@ -116,7 +124,6 @@ public class Player : BattleStateMachine {
         transform.position -= direction;
     }
 
-    // Should be deprecated by state machine
     private Vector3 GetMovementDirection() {
         // Check for "empty" inputs so that mage doesn't end up always looking at the same direction
         // This allows for the player to remain in the direction from the last input
@@ -147,6 +154,8 @@ public class Player : BattleStateMachine {
     private void OnGUI() {
         GUI.skin = customGUISkin;
         GUI.Label(new Rect(10, 10, 400, 50), "Current State: " + state);
+        GUI.Label(new Rect(10, 60, 400, 50), "Stockpile: " + stockpile.spellName);
+
     }
     #endregion
 }

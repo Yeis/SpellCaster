@@ -45,8 +45,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         Keyboard.current.onTextInput -= HandleTypingInput;
     }
 
-    void Awake()
-    {
+    void Awake() {
         //Trigger Animation
         animator = GetComponent<Animator>();
         //Get all UI References
@@ -68,7 +67,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
         //Get all UI References
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         commandLabels = new List<Text>();
- 
+
         ToggleAttackSubMenu(false);
         initialYSelectorPosition = selector.rectTransform.localPosition.y;
 
@@ -138,9 +137,9 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
 
                 //Terminamos de escribir la palabra
                 if (currentSpellIndex == currentSpell.spellName.Length) {
-                    ResetHUD();
                     player.stockpile = currentSpell;
                     player.Animator.SetTrigger("Cast");
+                    ResetHUD();
                 }
             } else {
                 // send to cooldown
@@ -152,8 +151,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
     }
 
     private IEnumerator DampenHealthBar(int value) {
-        for (int i = 0; i < value; i++)
-        {
+        for (int i = 0; i < value; i++) {
             this.HPSlider.value += 1;
             yield return null;
             this.HPSlider.value -= 1;
@@ -164,7 +162,7 @@ public class UIController : MonoBehaviour, INotifyPropertyChanged {
 
     public void UpdateHealth(int value, bool dampening) {
         this.HPSlider.value = value;
-        if(dampening) {
+        if (dampening) {
             StartCoroutine(DampenHealthBar(value));
         }
     }

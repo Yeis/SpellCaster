@@ -7,11 +7,18 @@ public class CastState : BattleState {
 
     public override IEnumerator Start() {
         Player.StateEnum = PlayerState.Cast;
+        var attackSpell = Player.stockpile;
+        Player.stockpile = new Spell();
 
-        // TODO - Spell animation
+        // Face who you're attacking
+        Player.Animator.SetBool("Moving", false);
+        Player.Animator.SetFloat("Horizontal", Player.direction.x);
+        Player.Animator.SetFloat("Vertical", Player.direction.y);
+
+        // Actually attack
+        Player.CombatController.Attack(Player.spells[0], Player.direction);
         yield return new WaitForSeconds(1f);
 
-        Player.stockpile = null;
         Player.SetState(new CooldownState(Player));
     }
 }
